@@ -1,8 +1,0 @@
-{
-    "env": {
-        "ANTHROPIC_AUTH_TOKEN": "sk-fv2xsqtq0XhHifIHqpmqQIAMni4YLjczKjYtvfrYDeIMNl8R",
-        "ANTHROPIC_API_URL": "https://yunwu.ai", 
-        "ANTHROPIC_BASE_URL": "https://yunwu.ai", 
-        "ANTHROPIC_MODEL": "claude-opus-4-6"
-    }
-}
