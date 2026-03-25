@@ -14,49 +14,387 @@ This repository contains the code and data for our series of work on **zero-shot
 
 ### How the Two Works Relate
 
-```
-----------------------------------------------------------------------------------------------------
-SpatialNav                                          SpatialAnt
-(Foundation)                                        (Real-World Extension)
-----------------------------------------------------------------------------------------------------
-                             Pre-exploration Assumption
-High-quality point clouds              -->          Real deployment with monocular RGB camera only
-are available after exploration                     (self-reconstructed noisy scenes)
-----------------------------------------------------------------------------------------------------
-                                  Core Mechanism
-Spatial Scene Graph (SSG)              -->          Visual Anticipation
-for global spatial reasoning                        for counterfactual reasoning
-----------------------------------------------------------------------------------------------------
-                                Experiment Settings   
-Discrete (sim) + Continuous (sim)      -->          Continuous (sim) + Hello-Robot (real)
-----------------------------------------------------------------------------------------------------
-```
+<div style="max-width: 850px; margin: 20px auto; font-family: sans-serif; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
+  
+  <div style="display: flex; background-color: #2c3e50; color: white; padding: 20px; align-items: center;">
+    <div style="flex: 1; text-align: center; padding-right: 20px;">
+      <div style="font-size: 1.3em; font-weight: bold;">SpatialNav</div>
+      <div style="font-size: 0.9em; color: #cbd5e1; margin-top: 4px;">(Foundation)</div>
+    </div>
+    <div style="width: 60px; text-align: center; color: #64748b; font-size: 1.5em; font-weight: bold;">&#8594;</div>
+    <div style="flex: 1; text-align: center; padding-left: 20px;">
+      <div style="font-size: 1.3em; font-weight: bold;">SpatialAnt</div>
+      <div style="font-size: 0.9em; color: #93c5fd; margin-top: 4px;">(Real-World Extension)</div>
+    </div>
+  </div>
 
-## Results
+  <div style="padding: 25px 20px; border-bottom: 1px solid #e2e8f0; background-color: #f8fafc;">
+    <div style="text-align: center; font-weight: bold; color: #141515; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
+      Pre-exploration Assumption
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
+        <b>Idealized Pre-Exploration</b><br><span style="font-size: 0.9em; opacity: 0.85;">(human-crafted point clouds are available after exploration)</span>
+      </div>
+      <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
+      <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
+        <b>Real Agent Pre-Exploration with monocular RGB camera only</b><br>
+        <span style="font-size: 0.9em; opacity: 0.85;">(self-reconstructed noisy scenes)</span>
+      </div>
+    </div>
+  </div>
 
-### SpatialNav
+  <div style="padding: 25px 20px; border-bottom: 1px solid #e2e8f0; background-color: #ffffff;">
+    <div style="text-align: center; font-weight: bold; color: #dc2626; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
+      Spatial Reasoning Mechanism
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
+        <b>Spatial Scene Graph (SSG)</b><br>for global perception
+      </div>
+      <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
+      <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
+        <b>Visual Anticipation</b><br>for counterfactual reasoning
+      </div>
+    </div>
+  </div>
 
-| Dataset | Setting | SR | SPL |
-|:---|:---|:---:|:---:|
-| R2R (val-unseen) | Discrete | 57.7 | 47.6 |
-| REVERIE (val-unseen) | Discrete | 49.6 | 40.6 |
-| R2R-CE (val-unseen) | Continuous | 64.0 | 52.2 |
-| RxR-CE (val-unseen) | Continuous | 32.4 | 19.6 |
+  <div style="padding: 25px 20px; background-color: #f8fafc;">
+    <div style="text-align: center; font-weight: bold; color: #16a34a; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
+      Experiment Settings
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
+        Discrete (sim) + <br>Continuous (sim)
+      </div>
+      <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
+      <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
+        Continuous (sim) + <br><b>Hello-Robot (real)</b>
+      </div>
+    </div>
+  </div>
 
-### SpatialAnt
+</div>
 
-| Dataset | Setting | SR | SPL |
-|:---|:---|:---:|:---:|
-| R2R-CE (val-unseen) | Continuous | 66.0 | 54.4 |
-| RxR-CE (val-unseen) | Continuous | 50.8 | 35.6 |
+## Performance
 
+### Results in Discrete Environments
 
-## TODO
+* The <b>best</b> and the <u>second best</u> results **within each group** are denoted by <b>bold</b> and <u>underline</u>.
 
-- [ ] Release the scene pre-exploration and reconstruction code
-- [ ] Release spatial scene graph construction code
-- [ ] Release the SpatialAnt and SpatialNav agent
-- [ ] Release real-world deployment code for Hello Robot
+<div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
+  <table style="width: 100%; max-width: 1000px; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
+    <thead>
+      <tr>
+        <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa; text-align: left;">Methods</th>
+        <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa;">Pre-Exp</th>
+        <th colspan="5" style="padding: 8px; border-bottom: 1px solid #aaa;">R2R</th>
+        <th colspan="3" style="padding: 8px; border-bottom: 1px solid #aaa;">REVERIE</th>
+      </tr>
+      <tr>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">TL(↓)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">NE(↓)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">OSR(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">OSR(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color: #e6f2ff;">
+        <td colspan="10" style="padding: 8px; text-align: left;"><b><i>Supervised Learning:</i></b></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">NavCoT</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">9.95</td>
+        <td style="padding: 8px;">6.36</td>
+        <td style="padding: 8px;">48</td>
+        <td style="padding: 8px;">40</td>
+        <td style="padding: 8px;">37</td>
+        <td style="padding: 8px;">14.2</td>
+        <td style="padding: 8px;">9.2</td>
+        <td style="padding: 8px;">7.2</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">PREVALENT</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">10.19</td>
+        <td style="padding: 8px;">4.71</td>
+        <td style="padding: 8px;">-</td>
+        <td style="padding: 8px;">58</td>
+        <td style="padding: 8px;">53</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">VLN-BERT</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">12.01</td>
+        <td style="padding: 8px;">3.93</td>
+        <td style="padding: 8px;">69</td>
+        <td style="padding: 8px;">63</td>
+        <td style="padding: 8px;">57</td>
+        <td style="padding: 8px;">27.7</td>
+        <td style="padding: 8px;">25.5</td>
+        <td style="padding: 8px;">21.1</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">HAMT</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">11.46</td>
+        <td style="padding: 8px;"><u>2.29</u></td>
+        <td style="padding: 8px;">73</td>
+        <td style="padding: 8px;">66</td>
+        <td style="padding: 8px;"><u>61</u></td>
+        <td style="padding: 8px;">36.8</td>
+        <td style="padding: 8px;">33.0</td>
+        <td style="padding: 8px;">30.2</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">DUET</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">13.94</td>
+        <td style="padding: 8px;">3.31</td>
+        <td style="padding: 8px;"><u>81</u></td>
+        <td style="padding: 8px;"><u>72</u></td>
+        <td style="padding: 8px;">60</td>
+        <td style="padding: 8px;"><u>51.1</u></td>
+        <td style="padding: 8px;"><u>47.0</u></td>
+        <td style="padding: 8px;"><u>33.7</u></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">DUET+ScaleVLN</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">14.09</td>
+        <td style="padding: 8px;"><b>2.09</b></td>
+        <td style="padding: 8px;"><b>88</b></td>
+        <td style="padding: 8px;"><b>81</b></td>
+        <td style="padding: 8px;"><b>70</b></td>
+        <td style="padding: 8px;"><b>63.9</b></td>
+        <td style="padding: 8px;"><b>57.0</b></td>
+        <td style="padding: 8px;"><b>41.8</b></td>
+      </tr>
+      <tr style="background-color: #e6f2ff;">
+        <td colspan="10" style="padding: 8px; text-align: left;"><b><i>Zero-Shot:</i></b></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">NavGPT</td>
+        <td style="padding: 8px;">&#10005;</td>
+        <td style="padding: 8px;">11.45</td>
+        <td style="padding: 8px;">6.46</td>
+        <td style="padding: 8px;">42</td>
+        <td style="padding: 8px;">34</td>
+        <td style="padding: 8px;">29</td>
+        <td style="padding: 8px;">28.3</td>
+        <td style="padding: 8px;">19.2</td>
+        <td style="padding: 8px;">14.6</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">MapGPT</td>
+        <td style="padding: 8px;">&#10005;</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">5.63</td>
+        <td style="padding: 8px;">57.6</td>
+        <td style="padding: 8px;">43.7</td>
+        <td style="padding: 8px;">34.8</td>
+        <td style="padding: 8px;">36.8</td>
+        <td style="padding: 8px;">31.6</td>
+        <td style="padding: 8px;">20.3</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">MC-GPT</td>
+        <td style="padding: 8px;">&#10005;</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">5.42</td>
+        <td style="padding: 8px;">68.8</td>
+        <td style="padding: 8px;">32.1</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">30.3</td>
+        <td style="padding: 8px;">19.4</td>
+        <td style="padding: 8px;">9.7</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;">SpatialGPT</td>
+        <td style="padding: 8px;">&#10005;</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">5.56</td>
+        <td style="padding: 8px;"><b>70.8</b></td>
+        <td style="padding: 8px;">48.4</td>
+        <td style="padding: 8px;">36.1</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; text-align: left;"><b>SpatialNav (Ours)</b></td>
+        <td style="padding: 8px;">&#10003;</td>
+        <td style="padding: 8px;">13.8</td>
+        <td style="padding: 8px;"><u>4.54</u></td>
+        <td style="padding: 8px;"><u>68.2</u></td>
+        <td style="padding: 8px;"><u>57.7</u></td>
+        <td style="padding: 8px;"><u>47.8</u></td>
+        <td style="padding: 8px;"><b>58.1</b></td>
+        <td style="padding: 8px;"><u>49.6</u></td>
+        <td style="padding: 8px;"><u>34.6</u></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+### Results in Continuous Environments
+
+* The <b>best supervised</b> results are highlighted in <b>bold</b>, while the <u>best zero-shot</u> results are <u>underlined</u>.  
+* "Pre-Exp" denotes whether the zero-shot agent adopts the pre-exploration based navigation settings.
+
+<div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
+  <table style="width: 100%; max-width: 1000px; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
+    <thead>
+      <tr>
+        <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa;">#</th>
+        <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa; text-align: left;">Methods</th>
+        <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa;">Pre-Exp</th>
+        <th colspan="5" style="padding: 8px; border-bottom: 1px solid #aaa;">R2R-CE</th>
+        <th colspan="4" style="padding: 8px; border-bottom: 1px solid #aaa;">RxR-CE</th>
+      </tr>
+      <tr>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">NE(↓)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">OSR(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">nDTW(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">NE(↓)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
+        <th style="padding: 8px; border-bottom: 1px solid #333;">nDTW(↑)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color: #e6f2ff;">
+        <td colspan="12" style="padding: 8px; text-align: left;"><b><i>Supervised Learning:</i></b></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px;">1</td>
+        <td style="padding: 8px; text-align: left;">NavFoM</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">4.61</td>
+        <td style="padding: 8px;">72.1</td>
+        <td style="padding: 8px;">61.7</td>
+        <td style="padding: 8px;">55.3</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">4.74</td>
+        <td style="padding: 8px;">64.4</td>
+        <td style="padding: 8px;"><b>56.2</b></td>
+        <td style="padding: 8px;">65.8</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px;">2</td>
+        <td style="padding: 8px; text-align: left;">Efficient-VLN</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;"><b>4.18</b></td>
+        <td style="padding: 8px;"><b>73.7</b></td>
+        <td style="padding: 8px;"><b>64.2</b></td>
+        <td style="padding: 8px;"><b>55.9</b></td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;"><b>3.88</b></td>
+        <td style="padding: 8px;"><b>67.0</b></td>
+        <td style="padding: 8px;">54.3</td>
+        <td style="padding: 8px;"><b>68.4</b></td>
+      </tr>
+      <tr style="background-color: #e6f2ff;">
+        <td colspan="12" style="padding: 8px; text-align: left;"><b><i>Zero-Shot:</i></b></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px;">3</td>
+        <td style="padding: 8px; text-align: left;">Open-Nav</td>
+        <td style="padding: 8px;">&#10005;</td>
+        <td style="padding: 8px;">6.70</td>
+        <td style="padding: 8px;">23.0</td>
+        <td style="padding: 8px;">19.0</td>
+        <td style="padding: 8px;">16.1</td>
+        <td style="padding: 8px;">45.8</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px;">4</td>
+        <td style="padding: 8px; text-align: left;">Smartway</td>
+        <td style="padding: 8px;">&#10005;</td>
+        <td style="padding: 8px;">7.01</td>
+        <td style="padding: 8px;">51.0</td>
+        <td style="padding: 8px;">29.0</td>
+        <td style="padding: 8px;">22.5</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">--</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px;">5</td>
+        <td style="padding: 8px; text-align: left;">STRIDER</td>
+        <td style="padding: 8px;">&#10005;</td>
+        <td style="padding: 8px;">6.91</td>
+        <td style="padding: 8px;">39.0</td>
+        <td style="padding: 8px;">35.0</td>
+        <td style="padding: 8px;">30.3</td>
+        <td style="padding: 8px;">51.8</td>
+        <td style="padding: 8px;">11.19</td>
+        <td style="padding: 8px;">21.2</td>
+        <td style="padding: 8px;">9.6</td>
+        <td style="padding: 8px;">30.1</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px;">6</td>
+        <td style="padding: 8px; text-align: left;">VLN-Zero</td>
+        <td style="padding: 8px;">&#10003;</td>
+        <td style="padding: 8px;">5.97</td>
+        <td style="padding: 8px;">51.6</td>
+        <td style="padding: 8px;">42.4</td>
+        <td style="padding: 8px;">26.3</td>
+        <td style="padding: 8px;">--</td>
+        <td style="padding: 8px;">9.13</td>
+        <td style="padding: 8px;">30.8</td>
+        <td style="padding: 8px;">19.0</td>
+        <td style="padding: 8px;">--</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px;">7</td>
+        <td style="padding: 8px; text-align: left;"><b>SpatialNav (Ours)</b></td>
+        <td style="padding: 8px;">&#10003;</td>
+        <td style="padding: 8px;">5.15</td>
+        <td style="padding: 8px;">66.0</td>
+        <td style="padding: 8px;">64.0</td>
+        <td style="padding: 8px;">51.1</td>
+        <td style="padding: 8px;">65.4</td>
+        <td style="padding: 8px;">7.64</td>
+        <td style="padding: 8px;">32.4</td>
+        <td style="padding: 8px;">24.6</td>
+        <td style="padding: 8px;">55.0</td>
+      </tr>
+      <tr style="background-color: #f2f2f2;">
+        <td style="padding: 8px;">8</td>
+        <td style="padding: 8px; text-align: left;"><b>SpatialAnt (Ours)</b></td>
+        <td style="padding: 8px;">&#10003;</td>
+        <td style="padding: 8px;"><u>4.42</u></td>
+        <td style="padding: 8px;"><u>76.0</u></td>
+        <td style="padding: 8px;"><u>66.0</u></td>
+        <td style="padding: 8px;"><u>54.4</u></td>
+        <td style="padding: 8px;"><u>69.5</u></td>
+        <td style="padding: 8px;"><u>5.28</u></td>
+        <td style="padding: 8px;"><u>50.8</u></td>
+        <td style="padding: 8px;"><u>35.6</u></td>
+        <td style="padding: 8px;"><u>65.4</u></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
 ## Citation
 
@@ -69,6 +407,17 @@ If you find our work useful, please consider citing:
   journal={arXiv preprint arXiv:2601.06806},
   year={2026}
 }
+
 ```
 
+
+
+
+##  Website License
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+</a>
+
+The website code is borrowed from the [Nerfies website](https://nerfies.github.io), and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 

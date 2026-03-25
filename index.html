@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Spatial-X">
+    <meta name="keywords" content="Vision-and-Language Navigation, Spatial Understanding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors</title>
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+    <!-- <meta name="generator" content="Jekyll v3.9.3" /> -->
+    <meta property="og:title" content="Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="canonical" href="https://spatial-vln.github.io/" />
+    <meta property="og:url" content="https://spatial-vln.github.io/" />
+    <meta property="og:site_name" content="Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./static/images/spatial_logo.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors" />
+    <meta name="twitter:description" content="Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors" />
+    <meta name="twitter:site" content="@CanyuChen3" />
+    <meta name="twitter:image" content="./static/images/spatial_logo.png" />
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","headline":"Spatial-X","name":"Spatial-X","url":"https://spatial-vln.github.io/"}</script>
+    <!-- End Jekyll SEO tag -->
+  
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/spatial_logo.png">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+    <style>
+        .grey-box {
+            background-color: #c0c0c0; /* Grey color */
+            color: rgb(70, 70, 70); /* White text color */
+            padding: 20px; /* Padding inside the box */
+            margin: 20px; /* Margin outside the box */
+            text-align: center; /* Center the text */
+        }
+
+        .expandable-card.expanded .card-text-container {
+            max-height: none;
+        }
+
+        .expand-btn {
+            position: relative;
+            display: none;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* margin-top: -20px; */
+            /* justify-content: center; */
+            color: #510c75;
+            border-color: transparent;
+        }
+
+        .expand-btn:hover {
+            background-color: rgba(200, 200, 200, 0.8);
+            text-decoration: none;
+            border-color: transparent;
+            color: #510c75;
+        }
+
+        .expand-btn:focus {
+            outline: none;
+            text-decoration: none;
+        }
+
+        .expandable-card:not(.expanded) .card-text-container:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 1));
+        }
+
+        .expandable-card:not(.expanded) .expand-btn {
+            margin-top: -40px;
+        }
+
+        .card-body {
+            padding-bottom: 5px;
+        }
+
+        .vertical-flex-layout {
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .figure-img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .adjustable-font-size {
+            font-size: calc(0.5rem + 2vw);
+        }
+
+        .chat-history {
+            flex-grow: 1;
+            overflow-y: auto;
+            /* overflow-x: hidden; */
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        #gradio pre {
+            background-color: transparent;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+          <a class="navbar-item" href="http://www.fudan-disc.com/">
+          <span class="icon">
+              <i class="fas fa-home"></i>
+          </span>
+          </a>
+    
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More Research
+            </a>
+            <div class="navbar-dropdown">
+                <a class="navbar-item" href="https://sxyxs.github.io/smartway/">
+                    🤖SmartWay
+                </a>
+                <a class="navbar-item" href="https://sihaoevery.github.io/vlnverse/">
+                    🕸️VLNVerse
+                </a>
+                <!-- <a class="navbar-item" href="https://github.com/IMNearth/CoAT/">
+                    ⛓️CoAT
+                </a>
+                <a class="navbar-item" href="https://github.com/yuyq96/TextHawk/">
+                    🦅TextHawk
+                </a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 主标题：两篇论文的共同信息 -->
+    <section class="hero">
+        <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 id="Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors" class="title is-2 publication-title">
+                        <img src="static/images/spatial_logo.png" width="80" style="margin-bottom: 0.5;"/>
+                        <p align="center">
+                            Spatial-X: Zero-Shot Vision-and-Language Navigation with
+                            Global Scene Priors
+                        <p>
+                    </h1>
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"><b style="color:#f68946; font-weight:normal">&#x25B6 </b> Fudan University </b></span>
+                        <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> Australian Institute for Machine Learning </span>
+                        <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b> Shanghai Innovation Institute </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- 两篇论文的简明卡片 -->
+    <section class="hero" style="background-color: #f8fafc; padding: 0px 0;">
+        <div class="hero-body">
+        <!-- <div class="container is-max-desktop"> -->
+        <!-- <div class="container is-max-widescreen">  -->
+        <div class="container is-fullhd">
+        <!-- <div class="container is-fluid" style="padding: 0 5%;"></div> -->
+        <!-- <div class="container" style="max-width: 1px;"></div> -->
+            <div class="columns is-centered">
+            
+            <div class="column is-half">
+                <div style="height: 100%; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+                
+                <div class="has-text-centered">
+                    <h1 id="Spatial-X" class="title is-3 publication-title">
+                    <p align="center">
+                        <i>SpatialNav</i> : Leveraging Spatial Scene Graphs for Zero-Shot Vision-and-Language Navigation
+                    </p>
+                    </h1>
+                    
+                    <div class="is-size-5 publication-authors" style="margin-bottom: 10px;">
+                    <span class="author-block">
+                        <a href="https://imnearth.github.io/">Jiwen Zhang</a>,
+                        <!-- <sup>1,2</sup> -->
+                    </span>
+                    <span class="author-block">
+                        <a href="https://junction4nako.github.io/">Zejun Li</a>,</span>
+                    <span class="author-block">
+                        <a href="https://siyuanwangw.github.io/">Siyuan Wang</a>,
+                    </span>
+                    <span class="author-block">
+                        <a href="https://scholar.google.com/citations?user=hjp3bMYAAAAJ&hl=en">Xiangyu Shi</a>,
+                    </span>
+                    <br>
+                    <span class="author-block">
+                        <a href="http://www.fudan-disc.com/people/zywei">Zhongyu Wei</a><sup>†</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="https://v3alab.github.io/">Qi Wu</a>.
+                    </span>
+                    </div>
+
+                    <!-- <div class="is-size-6 publication-authors" style="color: #64748b;">
+                    <span class="author-block"><sup>1</sup>Fudan University</span>
+                    <span class="author-block"><sup>2</sup>Australian Institute for Machine Learning</span>
+                    <span class="author-block"><sup>3</sup>Shanghai Innovation Institute</span>
+                    <span class="author-block"><sup>4</sup>University of Southern California</span>
+                    </div> -->
+                    <div class="is-size-6 publication-authors" style="color: #94a3b8; margin-top: 8px;">
+                    <!-- <span class="author-block">* Equal contribution</span> -->
+                    <span class="author-block" style="margin-left: 10px;">† Corresponding Author</span>
+                    </div>
+                </div>
+
+                <div class="publication-links has-text-centered" style="margin-top: 25px;">
+                    <span class="link-block">
+                        <a href="https://arxiv.org/abs/2601.06806" target="_blank"
+                            class="external-link button is-normal is-rounded is-dark">
+                            <span class="icon">
+                            <i class="ai ai-arxiv"></i>
+                            </span>
+                            <span>arXiv</span>
+                        </a>
+                    </span>
+                    <span class="link-block">
+                        <a href="https://github.com/IMNearth/Spatial-VLN" target="_blank"
+                            class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fab fa-github"></i></span>
+                        <span>Code</span>
+                        </a>
+                    </span>
+                </div>
+
+                </div>
+            </div>
+
+            <div class="column is-half">
+                <div style="height: 100%; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 25px; display: flex; flex-direction: column; justify-content: space-between;">
+                
+                <div class="has-text-centered">
+                    <h1 id="SpatialAnt" class="title is-3 publication-title">
+                    <p align="center">
+                        <i>SpatialAnt</i> : Autonomous Zero-Shot Robot Navigation via Active Scene Reconstruction and Visual Anticipation
+                    </p>
+                    </h1>
+                    
+                    <div class="is-size-5 publication-authors" style="margin-bottom: 10px;">
+                    <span class="author-block">
+                        <a href="https://imnearth.github.io/">Jiwen Zhang</a>,
+                    </span>
+                    <span class="author-block">
+                        <a href="https://scholar.google.com/citations?user=hjp3bMYAAAAJ&hl=en">Xiangyu Shi</a>,
+                    </span>
+                    <span class="author-block">
+                        <a href="https://siyuanwangw.github.io/">Siyuan Wang</a>,
+                    </span>
+                    <span class="author-block">
+                        <a href="https://scholar.google.com/citations?user=hr5FDjMAAAAJ&hl=en">Zerui Li</a>,</span>
+                    <br>
+                    <span class="author-block">
+                        <a href="http://www.fudan-disc.com/people/zywei">Zhongyu Wei</a><sup>†</sup>,
+                    </span>
+                    <span class="author-block">
+                        <a href="https://v3alab.github.io/">Qi Wu</a>.
+                    </span>
+                    </div>
+
+                    <!-- <div class="is-size-6 publication-authors" style="color: #64748b;">
+                    <span class="author-block"><sup>1</sup>Fudan University</span>
+                    <span class="author-block"><sup>2</sup>Australian Institute for Machine Learning</span>
+                    <span class="author-block"><sup>3</sup>Shanghai Innovation Institute</span>
+                    <span class="author-block"><sup>4</sup>University of Southern California</span>
+                    </div> -->
+                    <div class="is-size-6 publication-authors" style="color: #94a3b8; margin-top: 8px;">
+                    <!-- <span class="author-block">* Equal contribution</span> -->
+                    <span class="author-block" style="margin-left: 10px;">† Corresponding Author</span>
+                    </div>
+                </div>
+
+                <div class="publication-links has-text-centered" style="margin-top: 25px;">
+                    <span class="link-block">
+                        <a href="https://arxiv.org/abs/2601.06806" target="_blank"
+                            class="external-link button is-normal is-rounded is-dark">
+                            <span class="icon">
+                            <i class="ai ai-arxiv"></i>
+                            </span>
+                            <span>arXiv</span>
+                        </a>
+                    </span>
+                    <span class="link-block">
+                        <a href="https://github.com/IMNearth/Spatial-VLN" target="_blank"
+                            class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon"><i class="fab fa-github"></i></span>
+                        <span>Code</span>
+                        </a>
+                    </span>
+                </div>
+
+                </div>
+            </div>
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- 放一些样例视频 -->
+    <section class="section">
+        <div class="container is-max-desktop">
+            <figure>
+            <img src="static/images/uihawk_examples.png"  alt="survey" >
+            </figure>
+            <div style="text-align:center">
+            <div class="content has-text-justified">
+                <p>
+                <i><b>Example of a GUI navigation episode together with the screen understanding tasks supported by UI-Hawk.</b></i>
+                The user instruction is “I want to use Chrome to discover a new hiking trail.” 
+                The bounding boxes predicted by UI-Hawk are represented by red rectangles. 
+                The navigation actions are denoted by yellow hands and yellow rectangles.
+                </p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="section"  style="background-color:#efeff081">
+        <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+                <p>
+                Graphical User Interface (GUI) agents are expected to precisely operate on the screens of digital devices. Existing GUI agents merely depend on current visual observations and plain-text action history, ignoring the significance of history screens. To mitigate this issue, we propose <i><b>UI-Hawk</b></i>, a visual GUI agent specially designed to processing screen streams encountered during GUI navigation. UI-Hawk incorporates a history-aware visual encoder and an efficient resampler to handle the screen sequences. To acquire a better understanding of screen streams, we define four fundamental tasks ---- <i>UI grounding</i>, <i>UI referring</i>, <i>screen question answering</i>, and <i>screen summarization</i>. We develop an automated data curation method to generate the corresponding training data for UI-Hawk. Along with the efforts above, we have also created a benchmark <i><b>FunUI</b></i> to quantitatively evaluate the fundamental screen understanding abilities of MLLMs. Extensive experiments on FunUI and GUI navigation benchmarks consistently validate that screen stream understanding is not only beneficial but also essential for GUI navigation.
+                </p>
+                <p>
+                <strong>
+                    [UPDATE 2024/08/30] We have our paper online. The benchmark is coming soon!  
+                </strong>
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <h2 class="title is-3">Model Architecture</h2>
+        </div>
+        <div class="content has-text-justified">
+            <br><p>Given that mobile device screenshots typically have high and variable resolutions, a highly efficient and fine-grained perception capability is crucial for developing effective mobile GUI agents. We develop UI-Hawk to possess such capabilities to handle <b>multiple images of any resolution</b> simultaneously, <b>efficient compression of visual tokens</b>, and <b>precise referring and grounding capabilities</b>, by inheriting a lightweight visual encoder, along with an efficient resampler and a large language model enhanced with LoRA modules and a detection head from TextHawk. </p>
+            <p>Importantly, UI-Hawk places a strong emphasis on <i><b>modeling visual history</b></i>. Historical images often contain valuable details pertinent to ongoing tasks, while most GUI agents rely solely on text-based history, like chain-of-actions (Zhan and Zhang 2023) or chain-of-action-thoughts (Zhang et al. 2024b). UI-Hawk addresses this gap by <b>incorporating images of historical screens as model inputs</b>. Notably, we apply a scalable positional encoding and add textual indicators (e.g., “History Screenshot x”) for each historical screen to explicitly represent the screen streams.</p>
+        </div>
+        <div class="columns is-centered has-text-centered">
+            <figure>
+            <img src="static/images/uihawk_arch.png" style="width:90%" alt="Figure 1">
+            </figure>
+        </div>
+        <div style="text-align:center">
+            <div class="content has-text-justified">
+            <p>
+                <i><b>Figure 1: Model architecture of UI-Hawk.  </b></i>
+                The text tokenizer, layer normalization, and skip connections are omitted for simplicity. During the pre-training stage, the visual encoder is trained together with the LLM to obtain the fine-grained perception capabilities. During the fine-tuning stage, the visual encoder is frozen and the LLM is tuned by LoRA.
+            </p>
+            </div>
+        </div>
+        <div class="content has-text-justified">
+            <br><p>Given the scarcity of large-scale UI data, we devise an automated data curation method to extract the task-relevant data from diverse screenshots of Chinese and English mobile devices. More details could be found in Section 4 of our paper.</p>
+        </div>
+        </div>
+        <!-- --------------------------- -->
+        <br>    <br>
+        <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <h2 class="title is-3">FunUI Benchmark</h2>
+        </div>
+        <div class="content has-text-justified">
+            <p>To remedy the blank of comprehensive evaluation data in this area, we introduce <b>FunUI</b>, a bilingual evaluation benchmark encompassing 4 fundamental screen understanding tasks. </p>
+            <p>Concretely, FunUI distinguishes with previous benchmarks on the following aspects:</p>
+            <ul>
+            <li><b>Bilingual</b>: FunUI comprises of 2150 Chinese screens and 9347 English screens from Android devices, annotated with 14k and 18k samples, respectively. This is the first benchmark that enables the assessment of Chinese screen understandings.</li>
+            <li><b>Comprehensive</b>: FunUI includes different evaluation dimensions of screen understanding, including <i>UI grounding</i> and <i>UI referring</i> tasks to access the regional location and identification abilities of models, together with <i>screen question answering</i> and <i>screen summarization</i> tasks that require more integrated analysis of screen contents. </li>
+            <li><b>Diverse</b>: FunUI covers various types of question answering pairs, including grounding and referring questions about 120+ icons and widgets, and complex questions with related to elements relations, attributions, arithmetics and so on. These questions present a greater challenge for models compared to the commonly used OCR-related tasks.</li>
+            </ul>
+        </div>
+        <div class="columns is-centered has-text-centered">
+            <figure>
+            <img src="static/images/funui_bench.png" style="width:100%" alt="Figure 2">
+            </figure>
+        </div>
+        <div style="text-align:center">
+            <div class="content has-text-justified">
+            <p>
+                <i><b>Figure 2: Statistics of FunUI Benchmark. </b></i>
+                (a) Distributions of four fundamental tasks. The deep and shallow color represents for English and Chinese, respectively. (b) Various UI types included. (c) Diverse categories of screen question answering pairs. Note that these categories are not mutually excluded. (d) The annotated answer lengths of screen summarization task.
+            </p>
+            </div>
+        </div>
+        </div>
+        </div>
+        <!-- --------------------------- -->
+        <br>    <br>
+        <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <h2 class="title is-3">Experiment Results</h2>
+        </div>
+        <div class="content has-text-justified">
+            <p>Table 1 demonstrates the performance of UI-Hawk compared with previous state-of-the-art models on various screen understanding tasks. On English screens, compared to Spotlight and Ferret-UI, UI-Hawk possesses superior results in UI referring and screen question-answering. On Chinese screens, even a minor version of UI-Hawk, UI-Hawk-Minus, sur-passes Qwen-VL and InternVL2 on grounding and referring by a large margin. </p>
+            <p>Overall, Table 1 suggests that UI-Hawk is a bilingual model with advanced screen understanding capabilities.</p>
+        </div>
+        <div class="columns is-centered has-text-centered">
+            <figure>
+            <img src="static/images/table_fundamental_result.png" style="width:80%" alt="Table 1">
+            </figure>
+        </div>
+        <div style="text-align:center">
+            <div class="content has-text-justified">
+            <p>
+                <i><b>Table 1: Performance of UI understanding on FunUI benchmark. </b></i>
+                <i>GRD</i>: grounding, <i>REF</i>: referring, <i>SQA</i>: screen question answering, <i>SUM</i>: screen summarization. “FT?” means whether the model is trained on UI-related tasks. *Due to the budget limit, we randomly sampled 500 samples for each task. †Performance of close-source models is from the original paper.
+            </p>
+            </div>
+        </div>
+        <div class="content has-text-justified">
+            <br><p>We further validate the sequential navigation capability of UI-Hawk. Table 2 illustrates that UI-Hawk significantly outperforms  all other models, achieving a 9% absolute increase in overall action matching score and a 32.5% absolute increase in the prediction accuracy of click operations compared to the most capable OdysseyAgent. Further ablation studies (see our paper) confirm that, the improvements in UI-Hawk are largely attributed to its advanced screen stream understanding ability.</p>
+        </div>
+        <div class="columns is-centered has-text-centered">
+            <figure>
+            <img src="static/images/table_gui_odyssey_result.png" style="width:80%" alt="Table 2">
+            </figure>
+        </div>
+        <div style="text-align:center">
+            <div class="content has-text-justified">
+            <p>
+                <i><b>Table 2: Sequential navigation performance on GUI-Odyssey+ dataset. </b></i>
+                We report the averaged action matching score on six categories of navigation tasks, including tool, information, shopping, media, social and multi-apps, and the overall action matching score. “ClickAcc” stands for the accuracy of click operations, which directly reflects the grounding ability of models.
+            </p>
+            </div>
+        </div>
+        </div>
+        <!-- --------------------------- -->
+        <!--<br>    <br>
+        <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <h2 class="title is-3">Demo</h2>
+            <div class="content has-text-justified">
+            <p></p>
+            </div>
+        </div>
+        </div>-->
+        <!-- --------------------------- -->
+    </section>
+
+    <section class="section"  style="background-color:#efeff081">
+        <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+            <h2 class="title is-3">Conclusions</h2>
+            <div class="content has-text-justified">
+            <p>In this paper, we introduced UI-Hawk, the first GUI agent focused on screen stream understanding. Leveraging the efficient architecture to tackle with screen streams, UI-Hawk excels in four fundamental screen understanding tasks. For a comprehensive assessment under both Chinese and English scenarios, we established the bilingual FunUI benchmark to evaluate the fundamental screen comprehension of MLLMs. Extensive experiments demonstrates that UI-Hawk sets new state-of-the-art performance on episodic GUI navigation tasks, highlighting the importance of robust screen understanding for autonomous GUI agents.</p>
+            </div></div>
+        </div>
+        </div>
+    </section>
+
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+        <h2 class="title">Citation</h2>
+        <pre><code>
+            @article{zhang2026spatialnav,
+            title={SpatialNav: Leveraging Spatial Scene Graphs for Zero-Shot Vision-and-Language Navigation},
+            author={Zhang, Jiwen and Li, Zejun and Wang, Siyuan and Shi, Xiangyu and Wei, Zhongyu and Wu, Qi},
+            journal={arXiv preprint arXiv:2601.06806},
+            year={2026}
+            }
+
+            @article{
+            }
+        </code></pre>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+            <div class="content">
+                <p>
+                This website is licensed under a <a rel="license"
+                    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                    Commons Attribution-ShareAlike 4.0 International License</a>.
+                </p>
+                <p>
+                This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source code</a>.
+                </p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+</body>  
+
+</html>
