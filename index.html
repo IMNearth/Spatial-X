@@ -12,8 +12,8 @@
     <!-- <meta name="generator" content="Jekyll v3.9.3" /> -->
     <meta property="og:title" content="Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors" />
     <meta property="og:locale" content="en_US" />
-    <link rel="canonical" href="https://spatial-vln.github.io/" />
-    <meta property="og:url" content="https://spatial-vln.github.io/" />
+    <!-- <link rel="canonical" href="https://spatial-vln.github.io/" />
+    <meta property="og:url" content="https://spatial-vln.github.io/" /> -->
     <meta property="og:site_name" content="Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="./static/images/spatial_logo.png" />
@@ -127,6 +127,59 @@
             margin-bottom: 10px;
         }
 
+        /* 网格容器：定义为2列，并设置间距 */
+        .teaser-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 大屏幕下分为2列 */
+            gap: 20px;              /* 卡片之间的间距 */
+            margin-top: 1.5rem;
+            margin-bottom: 30px;    /* 整体上下间距 */
+        }
+
+        /* 移动端适配：屏幕变小时改为1列或2列 */
+        @media (max-width: 1024px) {
+            .teaser-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .teaser-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        /* 单个卡片的样式：圆角、阴影、白底 */
+        .grid-item {
+            background-color: #ffffff;
+            border-radius: 12px; /* 圆角 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* 边缘淡阴影 */
+            overflow: hidden; /* 保证视频的角也能被裁成圆角 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 视频样式：占满宽度，消除底部多余空隙 */
+        .grid-item video {
+            width: 100%;
+            /* 【建议】120px太扁了，容易切掉关键画面，改为 180px 或 200px 效果更好 */
+            height: 155px; 
+            object-fit: cover;
+            object-position: top center; /* 关键：只切底部文字 */
+            display: block;
+        }
+
+        /* 文字说明部分：左对齐，增加内边距 */
+        .gallery-caption {
+            padding: 12px 15px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #4a4a4a;
+            background-color: #fafafa;
+            border-top: 1px solid #eee;
+            flex-grow: 1;
+            text-align: left; 
+        }
+
         #gradio pre {
             background-color: transparent;
         }
@@ -182,7 +235,7 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered">
                 <div class="column has-text-centered">
-                    <h1 id="Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors" class="title is-2 publication-title">
+                    <h1 id="Spatial-X Big-Title" class="title is-2 publication-title">
                         <img src="static/images/spatial_logo.png" width="80" style="margin-bottom: 0.5;"/>
                         <p align="center">
                             Spatial-X: Zero-Shot Vision-and-Language Navigation with
@@ -190,15 +243,84 @@
                         <p>
                     </h1>
                     <div class="is-size-5 publication-authors">
-                        <span class="author-block"><b style="color:#f68946; font-weight:normal">&#x25B6 </b> Fudan University </b></span>
+                        <span class="author-block"><b style="color:#f67846; font-weight:normal">&#x25B6 </b> Fudan University </b></span>
                         <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> Australian Institute for Machine Learning </span>
+                        <br>
                         <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b> Shanghai Innovation Institute </span>
+                        <span class="author-block"><b style="color:#00f2ee; font-weight:normal">&#x25B6 </b> University of Southern California </span>
                     </div>
                 </div>
             </div>
         </div>
         </div>
     </section>
+
+
+    <!-- 放一些样例视频 -->
+    <section class="hero is-white is-small">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column" style="max-width: 2400px;">
+                    <div class="has-text-centered">
+                        <h1 class="title is-3 publication-title">
+                            <p align="center"> Qualitative Examples </p>
+                        </h1>
+                        Left: <strong>Real Observation</strong> | Middle: <strong>Spatially Anticipated Future</strong> | Right: <strong>Top-Down Spatial Map</strong>
+                    </div>
+
+                    <div class="teaser-grid">
+                        <div class="grid-item">
+                            <video autoplay muted loop playsinline>
+                                <source src="./static/videos/8194nk5LbLH_ep_1148_path_follow.mp4" type="video/mp4">
+                            </video>
+                            <div class="gallery-caption">
+                                Walk towards fireplace, walk on the left side of the brown couch, turn right after couch, turn left after four person table and stop in front of barstools.
+                            </div>
+                        </div>
+
+                        <div class="grid-item">
+                            <video autoplay muted loop playsinline>
+                                <source src="./static/videos/zsNo4HB9uLZ_ep_387_path_follow.mp4" type="video/mp4">
+                            </video>
+                            <div class="gallery-caption">
+                                Turn to the right and go out the bathroom door. Turn to the right a little more. Go through the galley kitchen. Walk between the stove and the island. When you get past the island, stop, and wait. 
+                            </div>
+                        </div>
+
+                        <div class="grid-item">
+                            <video autoplay muted loop playsinline>
+                                <source src="./static/videos/TbHJrupSAjP_ep_275_path_follow.mp4" type="video/mp4">
+                            </video>
+                            <div class="gallery-caption">
+                                Walk past hall table. Walk into bedroom. Make left at table clock. Wait at bathroom door threshold. 
+                            </div>
+                        </div>
+
+                        <div class="grid-item">
+                            <video autoplay muted loop playsinline>
+                                <source src="./static/videos/x8F5xyUWy9e_ep_1051_path_follow.mp4" type="video/mp4">
+                            </video>
+                            <div class="gallery-caption">
+                                Turn around and exit the doorway. Turn left and exit the door. Stop next to the pool. 
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content has-text-justified">
+                        <br>
+                        <p>
+                        <!-- <i><b>Example of a GUI navigation episode together with the screen understanding tasks supported by UI-Hawk.</b></i> -->
+                        We are glad to introduce our series of work on zero-shot Vision-and-Language Navigation (VLN) using global scene priors. 
+                        We are the first to close-loop the pre-exploration to physically grounded 3D scene reconstructions (i.e. point clouds) for VLN agents and 
+                        investigate how pre-explored 3D scene representations can provide a robust reasoning basis in multiple ways.
+                        </p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- 两篇论文的简明卡片 -->
     <section class="hero" style="background-color: #f8fafc; padding: 0px 0;">
@@ -272,7 +394,6 @@
                         </a>
                     </span>
                 </div>
-
                 </div>
             </div>
 
@@ -346,162 +467,351 @@
         </div>
     </section>
 
-    <!-- 放一些样例视频 -->
     <section class="section">
         <div class="container is-max-desktop">
-            <figure>
-            <img src="static/images/uihawk_examples.png"  alt="survey" >
-            </figure>
-            <div style="text-align:center">
-            <div class="content has-text-justified">
-                <p>
-                <i><b>Example of a GUI navigation episode together with the screen understanding tasks supported by UI-Hawk.</b></i>
-                The user instruction is “I want to use Chrome to discover a new hiking trail.” 
-                The bounding boxes predicted by UI-Hawk are represented by red rectangles. 
-                The navigation actions are denoted by yellow hands and yellow rectangles.
-                </p>
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Overall Framework</h2>
             </div>
-        </div>
+            <div class="content has-text-justified">
+                ...
+            </div>
         </div>
     </section>
 
-    <section class="section"  style="background-color:#efeff081">
+    <section class="section" style="background-color:#f8fafc">
         <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
-            <div class="content has-text-justified">
-                <p>
-                Graphical User Interface (GUI) agents are expected to precisely operate on the screens of digital devices. Existing GUI agents merely depend on current visual observations and plain-text action history, ignoring the significance of history screens. To mitigate this issue, we propose <i><b>UI-Hawk</b></i>, a visual GUI agent specially designed to processing screen streams encountered during GUI navigation. UI-Hawk incorporates a history-aware visual encoder and an efficient resampler to handle the screen sequences. To acquire a better understanding of screen streams, we define four fundamental tasks ---- <i>UI grounding</i>, <i>UI referring</i>, <i>screen question answering</i>, and <i>screen summarization</i>. We develop an automated data curation method to generate the corresponding training data for UI-Hawk. Along with the efforts above, we have also created a benchmark <i><b>FunUI</b></i> to quantitatively evaluate the fundamental screen understanding abilities of MLLMs. Extensive experiments on FunUI and GUI navigation benchmarks consistently validate that screen stream understanding is not only beneficial but also essential for GUI navigation.
-                </p>
-                <p>
-                <strong>
-                    [UPDATE 2024/08/30] We have our paper online. The benchmark is coming soon!  
-                </strong>
-                </p>
+            
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Real-World Deployment</h2>
+                </div>
             </div>
+
+            <div class="columns is-centered">
+                <div class="column is-four-fifths"> 
+                    <div class="single-video-card">
+                        <video autoplay muted loop playsinline>
+                            <source src="./static/videos/deploy-clean.mp4" type="video/mp4">
+                        </video>
+                        <div class="gallery-caption">
+                            <b>Instruction</b>: Turn around and exit the corner. Go forward towards the door. 
+                            Approach the black humanoid robot (in a silver T-shirt) and stop as close as possible beside this black humanoid robot. 
+                            -------
+                            <b>Execution Success!</b>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+
         </div>
     </section>
+    
 
     <section class="section">
+    <!-- <section class="section"> -->
         <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
-            <h2 class="title is-3">Model Architecture</h2>
-        </div>
-        <div class="content has-text-justified">
-            <br><p>Given that mobile device screenshots typically have high and variable resolutions, a highly efficient and fine-grained perception capability is crucial for developing effective mobile GUI agents. We develop UI-Hawk to possess such capabilities to handle <b>multiple images of any resolution</b> simultaneously, <b>efficient compression of visual tokens</b>, and <b>precise referring and grounding capabilities</b>, by inheriting a lightweight visual encoder, along with an efficient resampler and a large language model enhanced with LoRA modules and a detection head from TextHawk. </p>
-            <p>Importantly, UI-Hawk places a strong emphasis on <i><b>modeling visual history</b></i>. Historical images often contain valuable details pertinent to ongoing tasks, while most GUI agents rely solely on text-based history, like chain-of-actions (Zhan and Zhang 2023) or chain-of-action-thoughts (Zhang et al. 2024b). UI-Hawk addresses this gap by <b>incorporating images of historical screens as model inputs</b>. Notably, we apply a scalable positional encoding and add textual indicators (e.g., “History Screenshot x”) for each historical screen to explicitly represent the screen streams.</p>
-        </div>
-        <div class="columns is-centered has-text-centered">
-            <figure>
-            <img src="static/images/uihawk_arch.png" style="width:90%" alt="Figure 1">
-            </figure>
-        </div>
-        <div style="text-align:center">
-            <div class="content has-text-justified">
-            <p>
-                <i><b>Figure 1: Model architecture of UI-Hawk.  </b></i>
-                The text tokenizer, layer normalization, and skip connections are omitted for simplicity. During the pre-training stage, the visual encoder is trained together with the LLM to obtain the fine-grained perception capabilities. During the fine-tuning stage, the visual encoder is frozen and the LLM is tuned by LoRA.
-            </p>
-            </div>
-        </div>
-        <div class="content has-text-justified">
-            <br><p>Given the scarcity of large-scale UI data, we devise an automated data curation method to extract the task-relevant data from diverse screenshots of Chinese and English mobile devices. More details could be found in Section 4 of our paper.</p>
-        </div>
-        </div>
-        <!-- --------------------------- -->
-        <br>    <br>
-        <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <h2 class="title is-3">FunUI Benchmark</h2>
-        </div>
-        <div class="content has-text-justified">
-            <p>To remedy the blank of comprehensive evaluation data in this area, we introduce <b>FunUI</b>, a bilingual evaluation benchmark encompassing 4 fundamental screen understanding tasks. </p>
-            <p>Concretely, FunUI distinguishes with previous benchmarks on the following aspects:</p>
-            <ul>
-            <li><b>Bilingual</b>: FunUI comprises of 2150 Chinese screens and 9347 English screens from Android devices, annotated with 14k and 18k samples, respectively. This is the first benchmark that enables the assessment of Chinese screen understandings.</li>
-            <li><b>Comprehensive</b>: FunUI includes different evaluation dimensions of screen understanding, including <i>UI grounding</i> and <i>UI referring</i> tasks to access the regional location and identification abilities of models, together with <i>screen question answering</i> and <i>screen summarization</i> tasks that require more integrated analysis of screen contents. </li>
-            <li><b>Diverse</b>: FunUI covers various types of question answering pairs, including grounding and referring questions about 120+ icons and widgets, and complex questions with related to elements relations, attributions, arithmetics and so on. These questions present a greater challenge for models compared to the commonly used OCR-related tasks.</li>
-            </ul>
-        </div>
-        <div class="columns is-centered has-text-centered">
-            <figure>
-            <img src="static/images/funui_bench.png" style="width:100%" alt="Figure 2">
-            </figure>
-        </div>
-        <div style="text-align:center">
-            <div class="content has-text-justified">
-            <p>
-                <i><b>Figure 2: Statistics of FunUI Benchmark. </b></i>
-                (a) Distributions of four fundamental tasks. The deep and shallow color represents for English and Chinese, respectively. (b) Various UI types included. (c) Diverse categories of screen question answering pairs. Note that these categories are not mutually excluded. (d) The annotated answer lengths of screen summarization task.
-            </p>
-            </div>
-        </div>
-        </div>
-        </div>
-        <!-- --------------------------- -->
-        <br>    <br>
-        <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <h2 class="title is-3">Experiment Results</h2>
-        </div>
-        <div class="content has-text-justified">
-            <p>Table 1 demonstrates the performance of UI-Hawk compared with previous state-of-the-art models on various screen understanding tasks. On English screens, compared to Spotlight and Ferret-UI, UI-Hawk possesses superior results in UI referring and screen question-answering. On Chinese screens, even a minor version of UI-Hawk, UI-Hawk-Minus, sur-passes Qwen-VL and InternVL2 on grounding and referring by a large margin. </p>
-            <p>Overall, Table 1 suggests that UI-Hawk is a bilingual model with advanced screen understanding capabilities.</p>
-        </div>
-        <div class="columns is-centered has-text-centered">
-            <figure>
-            <img src="static/images/table_fundamental_result.png" style="width:80%" alt="Table 1">
-            </figure>
-        </div>
-        <div style="text-align:center">
-            <div class="content has-text-justified">
-            <p>
-                <i><b>Table 1: Performance of UI understanding on FunUI benchmark. </b></i>
-                <i>GRD</i>: grounding, <i>REF</i>: referring, <i>SQA</i>: screen question answering, <i>SUM</i>: screen summarization. “FT?” means whether the model is trained on UI-related tasks. *Due to the budget limit, we randomly sampled 500 samples for each task. †Performance of close-source models is from the original paper.
-            </p>
-            </div>
-        </div>
-        <div class="content has-text-justified">
-            <br><p>We further validate the sequential navigation capability of UI-Hawk. Table 2 illustrates that UI-Hawk significantly outperforms  all other models, achieving a 9% absolute increase in overall action matching score and a 32.5% absolute increase in the prediction accuracy of click operations compared to the most capable OdysseyAgent. Further ablation studies (see our paper) confirm that, the improvements in UI-Hawk are largely attributed to its advanced screen stream understanding ability.</p>
-        </div>
-        <div class="columns is-centered has-text-centered">
-            <figure>
-            <img src="static/images/table_gui_odyssey_result.png" style="width:80%" alt="Table 2">
-            </figure>
-        </div>
-        <div style="text-align:center">
-            <div class="content has-text-justified">
-            <p>
-                <i><b>Table 2: Sequential navigation performance on GUI-Odyssey+ dataset. </b></i>
-                We report the averaged action matching score on six categories of navigation tasks, including tool, information, shopping, media, social and multi-apps, and the overall action matching score. “ClickAcc” stands for the accuracy of click operations, which directly reflects the grounding ability of models.
-            </p>
-            </div>
-        </div>
-        </div>
-        <!-- --------------------------- -->
-        <!--<br>    <br>
-        <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <h2 class="title is-3">Demo</h2>
-            <div class="content has-text-justified">
-            <p></p>
-            </div>
-        </div>
-        </div>-->
-        <!-- --------------------------- -->
-    </section>
+            <div class="column is-four-fifths has-text-centered">
+                <h2 class="title is-3">Simulated Performance</h2>
+                    <!-- 
+                        <b>Table 1: Results in Discrete Environments.</b> 
+                        The <b>best</b> and the <u>second best</u> results within each group are denoted by <b>bold</b> and <u>underline</u>.
+                        "Pre-Exp" denotes whether the zero-shot VLN agent adopts the pre-exploration based navigation settings.
+                        <br></br>
+                        
+                        <div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
+                        <table style="width: 100%; max-width: 1000px; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
+                            <thead>
+                            <tr>
+                                <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa; text-align: left;">Methods</th>
+                                <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa;">Pre-Exp</th>
+                                <th colspan="5" style="padding: 8px; border-bottom: 1px solid #aaa;">R2R</th>
+                                <th colspan="3" style="padding: 8px; border-bottom: 1px solid #aaa;">REVERIE</th>
+                            </tr>
+                            <tr>
+                                <th style="padding: 8px; border-bottom: 1px solid #333;">TL(↓)</th>
+                                <th style="padding: 8px; border-bottom: 1px solid #333;">NE(↓)</th>
+                                <th style="padding: 8px; border-bottom: 1px solid #333;">OSR(↑)</th>
+                                <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
+                                <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
+                                <th style="padding: 8px; border-bottom: 1px solid #333;">OSR(↑)</th>
+                                <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
+                                <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr style="background-color: #e6f2ff;">
+                                <td colspan="10" style="padding: 8px; text-align: left;"><b><i>Supervised Learning:</i></b></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">NavCoT</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">9.95</td>
+                                <td style="padding: 8px;">6.36</td>
+                                <td style="padding: 8px;">48</td>
+                                <td style="padding: 8px;">40</td>
+                                <td style="padding: 8px;">37</td>
+                                <td style="padding: 8px;">14.2</td>
+                                <td style="padding: 8px;">9.2</td>
+                                <td style="padding: 8px;">7.2</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">VLN-BERT</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">12.01</td>
+                                <td style="padding: 8px;">3.93</td>
+                                <td style="padding: 8px;">69</td>
+                                <td style="padding: 8px;">63</td>
+                                <td style="padding: 8px;">57</td>
+                                <td style="padding: 8px;">27.7</td>
+                                <td style="padding: 8px;">25.5</td>
+                                <td style="padding: 8px;">21.1</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">HAMT</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">11.46</td>
+                                <td style="padding: 8px;"><u>2.29</u></td>
+                                <td style="padding: 8px;">73</td>
+                                <td style="padding: 8px;">66</td>
+                                <td style="padding: 8px;"><u>61</u></td>
+                                <td style="padding: 8px;">36.8</td>
+                                <td style="padding: 8px;">33.0</td>
+                                <td style="padding: 8px;">30.2</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">DUET</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">13.94</td>
+                                <td style="padding: 8px;">3.31</td>
+                                <td style="padding: 8px;"><u>81</u></td>
+                                <td style="padding: 8px;"><u>72</u></td>
+                                <td style="padding: 8px;">60</td>
+                                <td style="padding: 8px;"><u>51.1</u></td>
+                                <td style="padding: 8px;"><u>47.0</u></td>
+                                <td style="padding: 8px;"><u>33.7</u></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">DUET+ScaleVLN</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">14.09</td>
+                                <td style="padding: 8px;"><b>2.09</b></td>
+                                <td style="padding: 8px;"><b>88</b></td>
+                                <td style="padding: 8px;"><b>81</b></td>
+                                <td style="padding: 8px;"><b>70</b></td>
+                                <td style="padding: 8px;"><b>63.9</b></td>
+                                <td style="padding: 8px;"><b>57.0</b></td>
+                                <td style="padding: 8px;"><b>41.8</b></td>
+                            </tr>
+                            <tr style="background-color: #e6f2ff;">
+                                <td colspan="10" style="padding: 8px; text-align: left;"><b><i>Zero-Shot:</i></b></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">NavGPT</td>
+                                <td style="padding: 8px;">&#10005;</td>
+                                <td style="padding: 8px;">11.45</td>
+                                <td style="padding: 8px;">6.46</td>
+                                <td style="padding: 8px;">42</td>
+                                <td style="padding: 8px;">34</td>
+                                <td style="padding: 8px;">29</td>
+                                <td style="padding: 8px;">28.3</td>
+                                <td style="padding: 8px;">19.2</td>
+                                <td style="padding: 8px;">14.6</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">MapGPT</td>
+                                <td style="padding: 8px;">&#10005;</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">5.63</td>
+                                <td style="padding: 8px;">57.6</td>
+                                <td style="padding: 8px;">43.7</td>
+                                <td style="padding: 8px;">34.8</td>
+                                <td style="padding: 8px;">36.8</td>
+                                <td style="padding: 8px;">31.6</td>
+                                <td style="padding: 8px;">20.3</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; text-align: left;">SpatialGPT</td>
+                                <td style="padding: 8px;">&#10005;</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">5.56</td>
+                                <td style="padding: 8px;"><b>70.8</b></td>
+                                <td style="padding: 8px;">48.4</td>
+                                <td style="padding: 8px;">36.1</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">--</td>
+                                <td style="padding: 8px;">--</td>
+                            </tr>
+                            <tr style="background-color: #f2f2f2;">
+                                <td style="padding: 8px; text-align: left;"><b>SpatialNav (Ours)</b></td>
+                                <td style="padding: 8px;">&#10003;</td>
+                                <td style="padding: 8px;">13.8</td>
+                                <td style="padding: 8px;"><u>4.54</u></td>
+                                <td style="padding: 8px;"><u>68.2</u></td>
+                                <td style="padding: 8px;"><u>57.7</u></td>
+                                <td style="padding: 8px;"><u>47.8</u></td>
+                                <td style="padding: 8px;"><b>58.1</b></td>
+                                <td style="padding: 8px;"><u>49.6</u></td>
+                                <td style="padding: 8px;"><u>34.6</u></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    -->
+                    <!-- <br></br> -->
 
-    <section class="section"  style="background-color:#efeff081">
-        <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-            <h2 class="title is-3">Conclusions</h2>
-            <div class="content has-text-justified">
-            <p>In this paper, we introduced UI-Hawk, the first GUI agent focused on screen stream understanding. Leveraging the efficient architecture to tackle with screen streams, UI-Hawk excels in four fundamental screen understanding tasks. For a comprehensive assessment under both Chinese and English scenarios, we established the bilingual FunUI benchmark to evaluate the fundamental screen comprehension of MLLMs. Extensive experiments demonstrates that UI-Hawk sets new state-of-the-art performance on episodic GUI navigation tasks, highlighting the importance of robust screen understanding for autonomous GUI agents.</p>
-            </div></div>
+                    <!-- <b>Table 2: Results in Continuous Environments.</b>  -->
+                    The <b>best supervised</b> results are highlighted in <b>bold</b>, while the <u>best zero-shot</u> results are <u>underlined</u>.  
+                    "Pre-Exp" denotes whether the zero-shot agent adopts the pre-exploration based navigation settings.
+                    <br></br>
+
+                    <div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
+                    <table style="width: 100%; max-width: 1000px; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
+                        <thead>
+                        <tr>
+                            <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa;">#</th>
+                            <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa; text-align: left;">Methods</th>
+                            <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa;">Pre-Exp</th>
+                            <th colspan="5" style="padding: 8px; border-bottom: 1px solid #aaa;">R2R-CE</th>
+                            <th colspan="4" style="padding: 8px; border-bottom: 1px solid #aaa;">RxR-CE</th>
+                        </tr>
+                        <tr>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">NE(↓)</th>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">OSR(↑)</th>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">nDTW(↑)</th>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">NE(↓)</th>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
+                            <th style="padding: 8px; border-bottom: 1px solid #333;">nDTW(↑)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr style="background-color: #e6f2ff;">
+                            <td colspan="12" style="padding: 8px; text-align: left;"><b><i>Supervised Learning:</i></b></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">1</td>
+                            <td style="padding: 8px; text-align: left;">NavFoM</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">4.61</td>
+                            <td style="padding: 8px;">72.1</td>
+                            <td style="padding: 8px;">61.7</td>
+                            <td style="padding: 8px;">55.3</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">4.74</td>
+                            <td style="padding: 8px;">64.4</td>
+                            <td style="padding: 8px;"><b>56.2</b></td>
+                            <td style="padding: 8px;">65.8</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">2</td>
+                            <td style="padding: 8px; text-align: left;">Efficient-VLN</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;"><b>4.18</b></td>
+                            <td style="padding: 8px;"><b>73.7</b></td>
+                            <td style="padding: 8px;"><b>64.2</b></td>
+                            <td style="padding: 8px;"><b>55.9</b></td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;"><b>3.88</b></td>
+                            <td style="padding: 8px;"><b>67.0</b></td>
+                            <td style="padding: 8px;">54.3</td>
+                            <td style="padding: 8px;"><b>68.4</b></td>
+                        </tr>
+                        <tr style="background-color: #e6f2ff;">
+                            <td colspan="12" style="padding: 8px; text-align: left;"><b><i>Zero-Shot:</i></b></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">3</td>
+                            <td style="padding: 8px; text-align: left;">Open-Nav</td>
+                            <td style="padding: 8px;">&#10005;</td>
+                            <td style="padding: 8px;">6.70</td>
+                            <td style="padding: 8px;">23.0</td>
+                            <td style="padding: 8px;">19.0</td>
+                            <td style="padding: 8px;">16.1</td>
+                            <td style="padding: 8px;">45.8</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">--</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">4</td>
+                            <td style="padding: 8px; text-align: left;">Smartway</td>
+                            <td style="padding: 8px;">&#10005;</td>
+                            <td style="padding: 8px;">7.01</td>
+                            <td style="padding: 8px;">51.0</td>
+                            <td style="padding: 8px;">29.0</td>
+                            <td style="padding: 8px;">22.5</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">--</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">5</td>
+                            <td style="padding: 8px; text-align: left;">STRIDER</td>
+                            <td style="padding: 8px;">&#10005;</td>
+                            <td style="padding: 8px;">6.91</td>
+                            <td style="padding: 8px;">39.0</td>
+                            <td style="padding: 8px;">35.0</td>
+                            <td style="padding: 8px;">30.3</td>
+                            <td style="padding: 8px;">51.8</td>
+                            <td style="padding: 8px;">11.19</td>
+                            <td style="padding: 8px;">21.2</td>
+                            <td style="padding: 8px;">9.6</td>
+                            <td style="padding: 8px;">30.1</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;">6</td>
+                            <td style="padding: 8px; text-align: left;">VLN-Zero</td>
+                            <td style="padding: 8px;">&#10003;</td>
+                            <td style="padding: 8px;">5.97</td>
+                            <td style="padding: 8px;">51.6</td>
+                            <td style="padding: 8px;">42.4</td>
+                            <td style="padding: 8px;">26.3</td>
+                            <td style="padding: 8px;">--</td>
+                            <td style="padding: 8px;">9.13</td>
+                            <td style="padding: 8px;">30.8</td>
+                            <td style="padding: 8px;">19.0</td>
+                            <td style="padding: 8px;">--</td>
+                        </tr>
+                        <tr style="background-color: #f2f2f2;">
+                            <td style="padding: 8px;">7</td>
+                            <td style="padding: 8px; text-align: left;"><b>SpatialNav (Ours)</b></td>
+                            <td style="padding: 8px;">&#10003;</td>
+                            <td style="padding: 8px;">5.15</td>
+                            <td style="padding: 8px;">66.0</td>
+                            <td style="padding: 8px;">64.0</td>
+                            <td style="padding: 8px;">51.1</td>
+                            <td style="padding: 8px;">65.4</td>
+                            <td style="padding: 8px;">7.64</td>
+                            <td style="padding: 8px;">32.4</td>
+                            <td style="padding: 8px;">24.6</td>
+                            <td style="padding: 8px;">55.0</td>
+                        </tr>
+                        <tr style="background-color: #f2f2f2;">
+                            <td style="padding: 8px;">8</td>
+                            <td style="padding: 8px; text-align: left;"><b>SpatialAnt (Ours)</b></td>
+                            <td style="padding: 8px;">&#10003;</td>
+                            <td style="padding: 8px;"><u>4.42</u></td>
+                            <td style="padding: 8px;"><u>76.0</u></td>
+                            <td style="padding: 8px;"><u>66.0</u></td>
+                            <td style="padding: 8px;"><u>54.4</u></td>
+                            <td style="padding: 8px;"><u>69.5</u></td>
+                            <td style="padding: 8px;"><u>5.28</u></td>
+                            <td style="padding: 8px;"><u>50.8</u></td>
+                            <td style="padding: 8px;"><u>35.6</u></td>
+                            <td style="padding: 8px;"><u>65.4</u></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+
+                </div>
+            </div>
         </div>
         </div>
     </section>
