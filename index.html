@@ -238,7 +238,7 @@
                     </h1>
                     <div class="is-size-5 publication-authors">
                         <span class="author-block"><b style="color:#f67846; font-weight:normal">&#x25B6 </b> Fudan University </b></span>
-                        <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> Australian Institute for Machine Learning </span>
+                        <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> Adelaide University </span>
                         <br>
                         <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b> Shanghai Innovation Institute </span>
                         <span class="author-block"><b style="color:#00f2ee; font-weight:normal">&#x25B6 </b> University of Southern California </span>
@@ -300,13 +300,12 @@
                         </div>
                     </div>
                     
-                    <div class="content has-text-justified" style="padding: 0 2%;">
+                    <div class="content has-text-justified" style="padding: 0 10%;">
                         <br>
                         <p>
                         <!-- <i><b>Example of a GUI navigation episode together with the screen understanding tasks supported by UI-Hawk.</b></i> -->
-                        We are glad to introduce our <b>series of works</b> on zero-shot Vision-and-Language Navigation (VLN) using global scene priors. <br>
-                        We are the first to close-loop the pre-exploration to physically grounded 3D scene reconstructions (i.e. point clouds) for VLN agents and 
-                        investigate how pre-explored 3D scene priors can provide a robust reasoning basis in multiple ways.
+                        We are glad to introduce our <b>series of works</b> on zero-shot Vision-and-Language Navigation (VLN) using global scene priors. We are the first to close-loop the pre-exploration to physically grounded 3D scene reconstructions (i.e. point clouds) for VLN agents and 
+                        investigate <b>how pre-explored 3D scene priors can provide a robust reasoning basis</b> in multiple ways.
                         </p>
                         <br>
                     </div>
@@ -381,10 +380,19 @@
                         </a>
                     </span>
                     <span class="link-block">
-                        <a href="https://github.com/IMNearth/Spatial-VLN" target="_blank"
+                        <a href="https://github.com/IMNearth/Spatial-X" target="_blank"
                             class="external-link button is-normal is-rounded is-dark">
                         <span class="icon"><i class="fab fa-github"></i></span>
                         <span>Code</span>
+                        </a>
+                    </span>
+                    <span class="link-block">
+                        <a href="https://github.com/IMNearth/Spatial-X" target="_blank"
+                            class="external-link button is-normal is-rounded is-dark">
+                            <span class="icon">
+                            <i class="fas fa-database"></i>
+                            </span>
+                            <span>Data</span>
                         </a>
                     </span>
                 </div>
@@ -445,10 +453,19 @@
                         </a>
                     </span>
                     <span class="link-block">
-                        <a href="https://github.com/IMNearth/Spatial-VLN" target="_blank"
+                        <a href="https://github.com/IMNearth/Spatial-X" target="_blank"
                             class="external-link button is-normal is-rounded is-dark">
                         <span class="icon"><i class="fab fa-github"></i></span>
                         <span>Code</span>
+                        </a>
+                    </span>
+                    <span class="link-block">
+                        <a href="https://github.com/IMNearth/Spatial-X" target="_blank"
+                            class="external-link button is-normal is-rounded is-dark">
+                            <span class="icon">
+                            <i class="fas fa-database"></i>
+                            </span>
+                            <span>Data</span>
                         </a>
                     </span>
                 </div>
@@ -462,22 +479,34 @@
     </section>
 
     <!-- 论文的整体框架 -->
-    <!-- <section class="section">
+    <section class="section">
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <h2 class="title is-3">Overall Framework</h2>
             </div>
         </div>
-        <br>
+        <br><br>
         <div class="container is-fullhd">
             <figure>
-                <img src="./static/images/framework.png"  alt="survey" >
+                <img src="./static/images/framework_compressed.png"  alt="survey" >
             </figure>
-            <div class="content has-text-justified">
-                ...
+            <div class="content has-text-justified" style="padding: 0 10%;">
+                Our framework consists of two key components: 
+                <ul>    
+                    <li>a <b>pre-exploration</b> phase that enables the agent to autonomously explore and reconstruct the 3D scene, and </li>
+                    <li>a <b>spatial reasoning mechanism</b> that leverages the reconstructed scene point clouds to 
+                        <ul>
+                            <li>construct a spatial scene graph for global perception by projecting the point clouds onto a 2D spatial map,</li>
+                            <li>perform spatially grounded visual anticipation for counterfactual reasoning by rendering the future views.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p style="margin-top: 1.0rem;">
+                    By integrating these components, our approach allows for robust zero-shot vision-and-language navigation in complex environments.
+                </p>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <!-- 论文的学术渊源 -->
     <section class="section" style="background-color:#f8fafc">
@@ -592,8 +621,10 @@
                     "Pre-Exp" denotes whether the zero-shot agent adopts the pre-exploration based navigation settings.
                     <br></br>
 
-                    <div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
-                    <table style="width: 100%; max-width: 1000px; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
+                    <!-- <div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
+                    <table style="width: 100%; max-width: 1000px; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;"> -->
+                    <div class="table-container" style="overflow-x: auto; width: 100%; font-family: sans-serif; font-size: 0.85em;">
+                    <table style="width: 100%; max-width: 1000px; margin: 0 auto; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
                         <thead>
                         <tr>
                             <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa;">#</th>
@@ -749,13 +780,17 @@
         <h2 class="title">Citation</h2>
         <pre><code>
             @article{zhang2026spatialnav,
-            title={SpatialNav: Leveraging Spatial Scene Graphs for Zero-Shot Vision-and-Language Navigation},
-            author={Zhang, Jiwen and Li, Zejun and Wang, Siyuan and Shi, Xiangyu and Wei, Zhongyu and Wu, Qi},
-            journal={arXiv preprint arXiv:2601.06806},
-            year={2026}
+                title={SpatialNav: Leveraging Spatial Scene Graphs for Zero-Shot Vision-and-Language Navigation},
+                author={Zhang, Jiwen and Li, Zejun and Wang, Siyuan and Shi, Xiangyu and Wei, Zhongyu and Wu, Qi},
+                journal={arXiv preprint arXiv:2601.06806},
+                year={2026}
             }
 
-            @article{
+
+            @article{zhang2026spatialant,
+                title={SpatialAnt: Autonomous Zero-Shot Robot Navigation via Active Scene Reconstruction and Visual Anticipation},
+                author={Zhang, Jiwen and Shi, Xiangyu and Wang, Siyuan and Li, Zerui and Wei, Zhongyu and Wu, Qi},
+                year={2026}
             }
         </code></pre>
         </div>

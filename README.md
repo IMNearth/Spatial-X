@@ -344,6 +344,13 @@ If you find our work useful, please consider citing:
   year={2026}
 }
 
+@article{zhang2026spatialant,
+  title={SpatialAnt: Autonomous Zero-Shot Robot Navigation via Active Scene Reconstruction and Visual Anticipation},
+  author={Zhang, Jiwen and Shi, Xiangyu and Wang, Siyuan and Li, Zerui and Wei, Zhongyu and Wu, Qi},
+  year={2026}
+}
+
+
 ```
 
 
