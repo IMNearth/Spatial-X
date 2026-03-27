@@ -217,12 +217,6 @@
                 <a class="navbar-item" href="https://sihaoevery.github.io/vlnverse/">
                     🕸️VLNVerse
                 </a>
-                <!-- <a class="navbar-item" href="https://github.com/IMNearth/CoAT/">
-                    ⛓️CoAT
-                </a>
-                <a class="navbar-item" href="https://github.com/yuyq96/TextHawk/">
-                    🦅TextHawk
-                </a> -->
             </div>
           </div>
         </div>
@@ -256,19 +250,19 @@
     </section>
 
 
-    <!-- 放一些样例视频 -->
+    <!-- 样例视频 -->
     <section class="hero is-white is-small">
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column" style="max-width: 2400px;">
-                    <div class="has-text-centered">
+                    <div class="has-text-centered" style="padding: 0 5%;">
                         <h1 class="title is-3 publication-title">
                             <p align="center"> Qualitative Examples </p>
                         </h1>
-                        Left: <strong>Real Observation</strong> | Middle: <strong>Spatially Anticipated Future</strong> | Right: <strong>Top-Down Spatial Map</strong>
+                        <b>FOR EACH VIDEO</b> -- Left: <strong>Real Observation</strong> | Middle: <strong>Spatially Anticipated Future</strong> | Right: <strong>Top-Down Spatial Map</strong>
                     </div>
 
-                    <div class="teaser-grid">
+                    <div class="teaser-grid" style="padding: 0 1%;">
                         <div class="grid-item">
                             <video autoplay muted loop playsinline>
                                 <source src="./static/videos/8194nk5LbLH_ep_1148_path_follow.mp4" type="video/mp4">
@@ -306,13 +300,13 @@
                         </div>
                     </div>
                     
-                    <div class="content has-text-justified">
+                    <div class="content has-text-justified" style="padding: 0 2%;">
                         <br>
                         <p>
                         <!-- <i><b>Example of a GUI navigation episode together with the screen understanding tasks supported by UI-Hawk.</b></i> -->
-                        We are glad to introduce our series of work on zero-shot Vision-and-Language Navigation (VLN) using global scene priors. 
+                        We are glad to introduce our <b>series of works</b> on zero-shot Vision-and-Language Navigation (VLN) using global scene priors. <br>
                         We are the first to close-loop the pre-exploration to physically grounded 3D scene reconstructions (i.e. point clouds) for VLN agents and 
-                        investigate how pre-explored 3D scene representations can provide a robust reasoning basis in multiple ways.
+                        investigate how pre-explored 3D scene priors can provide a robust reasoning basis in multiple ways.
                         </p>
                         <br>
                     </div>
@@ -467,18 +461,98 @@
         </div>
     </section>
 
-    <section class="section">
+    <!-- 论文的整体框架 -->
+    <!-- <section class="section">
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <h2 class="title is-3">Overall Framework</h2>
             </div>
+        </div>
+        <br>
+        <div class="container is-fullhd">
+            <figure>
+                <img src="./static/images/framework.png"  alt="survey" >
+            </figure>
             <div class="content has-text-justified">
                 ...
             </div>
         </div>
+    </section> -->
+
+    <!-- 论文的学术渊源 -->
+    <section class="section" style="background-color:#f8fafc">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <h2 class="title is-3">Academic Correlation</h2>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div style="max-width: 850px; margin: 20px auto; font-family: sans-serif; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
+                
+                <div style="display: flex; background-color: #2c3e50; color: white; padding: 20px; align-items: center;">
+                    <div style="flex: 1; text-align: center; padding-right: 20px;">
+                        <div style="font-size: 1.3em; color: #fefefe; font-weight: bold;">SpatialNav</div>
+                        <div style="font-size: 0.9em; color: #cbd5e1; margin-top: 4px;">(Foundation)</div>
+                    </div>
+                    <div style="width: 60px; text-align: center; color: #64748b; font-size: 1.5em; font-weight: bold;">&#8594;</div>
+                    <div style="flex: 1; text-align: center; padding-left: 20px;">
+                        <div style="font-size: 1.3em; color: #fefefe; font-weight: bold;">SpatialAnt</div>
+                        <div style="font-size: 0.9em; color: #93c5fd; margin-top: 4px;">(Real-World Extension)</div>
+                    </div>
+                </div>
+
+                <div style="padding: 25px 20px; border-bottom: 1px solid #e2e8f0; background-color: #f8fafc;">
+                    <div style="text-align: center; font-weight: bold; color: #141515; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
+                    Pre-exploration Assumption
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
+                        <b>Idealized Pre-Exploration</b><br><span style="font-size: 0.9em; opacity: 0.85;">(human-crafted point clouds are available after exploration)</span>
+                    </div>
+                    <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
+                    <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
+                        <b>Real Agent Pre-Exploration with monocular RGB camera only</b><br>
+                        <span style="font-size: 0.9em; opacity: 0.85;">(self-reconstructed noisy scenes)</span>
+                    </div>
+                    </div>
+                </div>
+
+                <div style="padding: 25px 20px; border-bottom: 1px solid #e2e8f0; background-color: #ffffff;">
+                    <div style="text-align: center; font-weight: bold; color: #dc2626; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
+                    Spatial Reasoning Mechanism
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
+                        <b>Spatial Scene Graph (SSG)</b><br>for global perception
+                    </div>
+                    <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
+                    <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
+                        <b>Visual Anticipation</b><br>for counterfactual reasoning
+                    </div>
+                    </div>
+                </div>
+
+                <!-- <div style="padding: 25px 20px; background-color: #f8fafc;">
+                    <div style="text-align: center; font-weight: bold; color: #16a34a; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
+                    Experiment Settings
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
+                        Discrete (sim) + <br>Continuous (sim)
+                    </div>
+                    <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
+                    <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
+                        Continuous (sim) + <br><b>Hello-Robot (real)</b>
+                    </div>
+                    </div>
+                </div> -->
+
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="section" style="background-color:#f8fafc">
+    <!-- 真实部署 -->
+    <section class="section">
         <div class="container is-max-desktop">
             
             <div class="columns is-centered has-text-centered">
@@ -506,161 +580,14 @@
         </div>
     </section>
     
-
-    <section class="section">
+    <!-- 模拟评测 -->
+    <section class="section" style="background-color:#f8fafc">
     <!-- <section class="section"> -->
         <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths has-text-centered">
                 <h2 class="title is-3">Simulated Performance</h2>
-                    <!-- 
-                        <b>Table 1: Results in Discrete Environments.</b> 
-                        The <b>best</b> and the <u>second best</u> results within each group are denoted by <b>bold</b> and <u>underline</u>.
-                        "Pre-Exp" denotes whether the zero-shot VLN agent adopts the pre-exploration based navigation settings.
-                        <br></br>
-                        
-                        <div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
-                        <table style="width: 100%; max-width: 1000px; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
-                            <thead>
-                            <tr>
-                                <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa; text-align: left;">Methods</th>
-                                <th rowspan="2" style="padding: 8px; border-bottom: 1px solid #aaa;">Pre-Exp</th>
-                                <th colspan="5" style="padding: 8px; border-bottom: 1px solid #aaa;">R2R</th>
-                                <th colspan="3" style="padding: 8px; border-bottom: 1px solid #aaa;">REVERIE</th>
-                            </tr>
-                            <tr>
-                                <th style="padding: 8px; border-bottom: 1px solid #333;">TL(↓)</th>
-                                <th style="padding: 8px; border-bottom: 1px solid #333;">NE(↓)</th>
-                                <th style="padding: 8px; border-bottom: 1px solid #333;">OSR(↑)</th>
-                                <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
-                                <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
-                                <th style="padding: 8px; border-bottom: 1px solid #333;">OSR(↑)</th>
-                                <th style="padding: 8px; border-bottom: 1px solid #333;">SR(↑)</th>
-                                <th style="padding: 8px; border-bottom: 1px solid #333;">SPL(↑)</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr style="background-color: #e6f2ff;">
-                                <td colspan="10" style="padding: 8px; text-align: left;"><b><i>Supervised Learning:</i></b></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">NavCoT</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">9.95</td>
-                                <td style="padding: 8px;">6.36</td>
-                                <td style="padding: 8px;">48</td>
-                                <td style="padding: 8px;">40</td>
-                                <td style="padding: 8px;">37</td>
-                                <td style="padding: 8px;">14.2</td>
-                                <td style="padding: 8px;">9.2</td>
-                                <td style="padding: 8px;">7.2</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">VLN-BERT</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">12.01</td>
-                                <td style="padding: 8px;">3.93</td>
-                                <td style="padding: 8px;">69</td>
-                                <td style="padding: 8px;">63</td>
-                                <td style="padding: 8px;">57</td>
-                                <td style="padding: 8px;">27.7</td>
-                                <td style="padding: 8px;">25.5</td>
-                                <td style="padding: 8px;">21.1</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">HAMT</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">11.46</td>
-                                <td style="padding: 8px;"><u>2.29</u></td>
-                                <td style="padding: 8px;">73</td>
-                                <td style="padding: 8px;">66</td>
-                                <td style="padding: 8px;"><u>61</u></td>
-                                <td style="padding: 8px;">36.8</td>
-                                <td style="padding: 8px;">33.0</td>
-                                <td style="padding: 8px;">30.2</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">DUET</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">13.94</td>
-                                <td style="padding: 8px;">3.31</td>
-                                <td style="padding: 8px;"><u>81</u></td>
-                                <td style="padding: 8px;"><u>72</u></td>
-                                <td style="padding: 8px;">60</td>
-                                <td style="padding: 8px;"><u>51.1</u></td>
-                                <td style="padding: 8px;"><u>47.0</u></td>
-                                <td style="padding: 8px;"><u>33.7</u></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">DUET+ScaleVLN</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">14.09</td>
-                                <td style="padding: 8px;"><b>2.09</b></td>
-                                <td style="padding: 8px;"><b>88</b></td>
-                                <td style="padding: 8px;"><b>81</b></td>
-                                <td style="padding: 8px;"><b>70</b></td>
-                                <td style="padding: 8px;"><b>63.9</b></td>
-                                <td style="padding: 8px;"><b>57.0</b></td>
-                                <td style="padding: 8px;"><b>41.8</b></td>
-                            </tr>
-                            <tr style="background-color: #e6f2ff;">
-                                <td colspan="10" style="padding: 8px; text-align: left;"><b><i>Zero-Shot:</i></b></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">NavGPT</td>
-                                <td style="padding: 8px;">&#10005;</td>
-                                <td style="padding: 8px;">11.45</td>
-                                <td style="padding: 8px;">6.46</td>
-                                <td style="padding: 8px;">42</td>
-                                <td style="padding: 8px;">34</td>
-                                <td style="padding: 8px;">29</td>
-                                <td style="padding: 8px;">28.3</td>
-                                <td style="padding: 8px;">19.2</td>
-                                <td style="padding: 8px;">14.6</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">MapGPT</td>
-                                <td style="padding: 8px;">&#10005;</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">5.63</td>
-                                <td style="padding: 8px;">57.6</td>
-                                <td style="padding: 8px;">43.7</td>
-                                <td style="padding: 8px;">34.8</td>
-                                <td style="padding: 8px;">36.8</td>
-                                <td style="padding: 8px;">31.6</td>
-                                <td style="padding: 8px;">20.3</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 8px; text-align: left;">SpatialGPT</td>
-                                <td style="padding: 8px;">&#10005;</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">5.56</td>
-                                <td style="padding: 8px;"><b>70.8</b></td>
-                                <td style="padding: 8px;">48.4</td>
-                                <td style="padding: 8px;">36.1</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">--</td>
-                                <td style="padding: 8px;">--</td>
-                            </tr>
-                            <tr style="background-color: #f2f2f2;">
-                                <td style="padding: 8px; text-align: left;"><b>SpatialNav (Ours)</b></td>
-                                <td style="padding: 8px;">&#10003;</td>
-                                <td style="padding: 8px;">13.8</td>
-                                <td style="padding: 8px;"><u>4.54</u></td>
-                                <td style="padding: 8px;"><u>68.2</u></td>
-                                <td style="padding: 8px;"><u>57.7</u></td>
-                                <td style="padding: 8px;"><u>47.8</u></td>
-                                <td style="padding: 8px;"><b>58.1</b></td>
-                                <td style="padding: 8px;"><u>49.6</u></td>
-                                <td style="padding: 8px;"><u>34.6</u></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    -->
-                    <!-- <br></br> -->
 
-                    <!-- <b>Table 2: Results in Continuous Environments.</b>  -->
                     The <b>best supervised</b> results are highlighted in <b>bold</b>, while the <u>best zero-shot</u> results are <u>underlined</u>.  
                     "Pre-Exp" denotes whether the zero-shot agent adopts the pre-exploration based navigation settings.
                     <br></br>
@@ -816,7 +743,7 @@
         </div>
     </section>
 
-
+    <!-- 引用信息 -->
     <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
         <h2 class="title">Citation</h2>

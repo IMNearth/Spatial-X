@@ -1,8 +1,8 @@
-# Spatial-VLN: Zero-Shot Vision-and-Language Navigation with Spatial Scene Priors
+# Spatial-X: Zero-Shot Vision-and-Language Navigation with Spatial Scene Priors
 
-This repository contains the code and data for our series of work on **zero-shot Vision-and-Language Navigation (VLN)** using **global spatial scene priors**. We are the first to close-loop the pre-exploration to physically grounded 3D scene reconstruction for VLN agents and investigate how pre-explored 3D scene representations can provide a robust reasoning basis in multiple ways.
+This repository contains the code and data for our series of work on **zero-shot Vision-and-Language Navigation (VLN)** using **global spatial scene priors**. We are the first to close-loop the pre-exploration to physically grounded 3D scene reconstructions (i.e. point clouds) for VLN agents and investigate how pre-explored 3D scene representations can provide a robust reasoning basis in multiple ways.
 
-## Our Works
+## Our Series of Works
 
 ### SpatialNav: Leveraging Spatial Scene Graphs for Zero-Shot Vision-and-Language Navigation [[arXiv]](https://arxiv.org/abs/2601.06806)
 
@@ -11,70 +11,6 @@ This repository contains the code and data for our series of work on **zero-shot
 ### SpatialAnt: Autonomous Zero-Shot Robot Navigation via Active Scene Reconstruction and Visual Anticipation [[arXiv]](#)
 
 > Building on SpatialNav, **SpatialAnt** addresses the reality gap when deploying pre-exploration-based agents on real robots. We introduce a **physical grounding strategy** to recover metric scale from monocular RGB-based reconstructed scene point clouds. We further design a **visual anticipation mechanism** that renders future observations from noisy point clouds for counterfactual reasoning. SpatialAnt achieves state-of-the-art zero-shot performance in both simulation and real-world deployment on the Hello Robot.
-
-### How the Two Works Relate
-
-<div style="max-width: 850px; margin: 20px auto; font-family: sans-serif; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);">
-  
-  <div style="display: flex; background-color: #2c3e50; color: white; padding: 20px; align-items: center;">
-    <div style="flex: 1; text-align: center; padding-right: 20px;">
-      <div style="font-size: 1.3em; font-weight: bold;">SpatialNav</div>
-      <div style="font-size: 0.9em; color: #cbd5e1; margin-top: 4px;">(Foundation)</div>
-    </div>
-    <div style="width: 60px; text-align: center; color: #64748b; font-size: 1.5em; font-weight: bold;">&#8594;</div>
-    <div style="flex: 1; text-align: center; padding-left: 20px;">
-      <div style="font-size: 1.3em; font-weight: bold;">SpatialAnt</div>
-      <div style="font-size: 0.9em; color: #93c5fd; margin-top: 4px;">(Real-World Extension)</div>
-    </div>
-  </div>
-
-  <div style="padding: 25px 20px; border-bottom: 1px solid #e2e8f0; background-color: #f8fafc;">
-    <div style="text-align: center; font-weight: bold; color: #141515; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
-      Pre-exploration Assumption
-    </div>
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-      <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
-        <b>Idealized Pre-Exploration</b><br><span style="font-size: 0.9em; opacity: 0.85;">(human-crafted point clouds are available after exploration)</span>
-      </div>
-      <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
-      <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
-        <b>Real Agent Pre-Exploration with monocular RGB camera only</b><br>
-        <span style="font-size: 0.9em; opacity: 0.85;">(self-reconstructed noisy scenes)</span>
-      </div>
-    </div>
-  </div>
-
-  <div style="padding: 25px 20px; border-bottom: 1px solid #e2e8f0; background-color: #ffffff;">
-    <div style="text-align: center; font-weight: bold; color: #dc2626; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
-      Spatial Reasoning Mechanism
-    </div>
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-      <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
-        <b>Spatial Scene Graph (SSG)</b><br>for global perception
-      </div>
-      <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
-      <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
-        <b>Visual Anticipation</b><br>for counterfactual reasoning
-      </div>
-    </div>
-  </div>
-
-  <div style="padding: 25px 20px; background-color: #f8fafc;">
-    <div style="text-align: center; font-weight: bold; color: #16a34a; margin-bottom: 15px; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1.5px;">
-      Experiment Settings
-    </div>
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-      <div style="flex: 1; background: white; padding: 15px 20px; border-radius: 8px; border: 1px solid #cbd5e1; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #334155; line-height: 1.5;">
-        Discrete (sim) + <br>Continuous (sim)
-      </div>
-      <div style="width: 60px; text-align: center; color: #94a3b8; font-size: 1.8em;">&#10142;</div>
-      <div style="flex: 1; background: #eff6ff; padding: 15px 20px; border-radius: 8px; border: 1px solid #bfdbfe; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); color: #1e3a8a; line-height: 1.5;">
-        Continuous (sim) + <br><b>Hello-Robot (real)</b>
-      </div>
-    </div>
-  </div>
-
-</div>
 
 ## Performance
 
