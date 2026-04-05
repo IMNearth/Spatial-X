@@ -35,7 +35,7 @@ The overall framework is summarized below:
 
 
 ## 🍻 News & TODOs
-- [x] **2026-04-05**: Release the raw code of **SpatialNav** agent. (Dependencies and instructions are comming soon ... )
+- [x] **2026-04-05**: Release the raw code of **SpatialNav** agent. (Dependencies and instructions are comming soon ...)
 - [ ] Release the data of predicted spatial scene graph on perfect human-crafted point clouds.
 - [ ] Release the raw code of environment exploration and scene reconstruction.
 - [ ] Release the data of agent-reconstructed noisy scene point clouds.
@@ -56,6 +56,7 @@ The overall framework is summarized below:
     <span class="author-block"><a href="http://www.fudan-disc.com/people/zywei">Zhongyu Wei</a><sup>†</sup>,</span>
     <span class="author-block"> <a href="https://v3alab.github.io/">Qi Wu</a>.</span>
 </div>
+<br>
 
 > We propose a zero-shot VLN setting that allows agents to pre-explore the environment, and construct the **Spatial Scene Graph (SSG)** to capture global spatial structure and semantics. Based on SSG, **SpatialNav** integrates **an agent-centric spatial map**, compass-aligned visual representation, and remote object localization for efficient navigation. SpatialNav significantly outperforms existing zero-shot agents and narrows the gap with state-of-the-art learning-based methods.
 
@@ -69,6 +70,7 @@ The overall framework is summarized below:
   <span class="author-block"><a href="http://www.fudan-disc.com/people/zywei">Zhongyu Wei</a><sup>†</sup>,</span>
   <span class="author-block"><a href="https://v3alab.github.io/">Qi Wu</a>.</span>
 </div>
+<br>
 
 > Building on SpatialNav, **SpatialAnt** addresses the reality gap when deploying pre-exploration-based agents on real robots. We introduce a **physical grounding strategy** to recover metric scale from monocular RGB-based reconstructed scene point clouds. We further design a **visual anticipation mechanism** that renders future observations from noisy point clouds for counterfactual reasoning. SpatialAnt achieves state-of-the-art zero-shot performance in both simulation and real-world deployment on the Hello Robot.
 
