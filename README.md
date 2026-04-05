@@ -23,6 +23,7 @@
   <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank">
     <img src="https://img.shields.io/badge/License-CC BY NC SA-89CFF0?style=for-the-badge" alt="license" />
   </a>
+  <br>
 </div>
 
 This repository contains the code and data for our **series of work** on **zero-shot Vision-and-Language Navigation (VLN)** using **global spatial scene priors**. We are the first to <span style="color: blue; font-weight: bold;">close-loop the pre-exploration to physically grounded 3D scene reconstructions</span> (i.e. point clouds) for VLN agents and <span style="color: blue; font-weight: bold;">investigate how pre-explored 3D scene priors can provide a robust reasoning basis</span> for MLLM-based agents in multiple ways.
@@ -35,7 +36,7 @@ The overall framework is summarized below:
 
 
 ## 🍻 News & TODOs
-- [x] **2026-04-05**: Release the raw code of **SpatialNav** agent. (Dependencies and instructions are comming soon ...)
+- [x] **2026-04-05**: Release the raw code of **SpatialNav** agent. (Dependencies and instructions comming soon...)
 - [ ] Release the data of predicted spatial scene graph on perfect human-crafted point clouds.
 - [ ] Release the raw code of environment exploration and scene reconstruction.
 - [ ] Release the data of agent-reconstructed noisy scene point clouds.
