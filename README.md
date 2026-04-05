@@ -1,22 +1,91 @@
-# Spatial-X: Zero-Shot Vision-and-Language Navigation with Spatial Scene Priors
+<div align="center">
+  <h1 id="Spatial-X Big-Title" class="title is-2 publication-title" style="text-align: center;">
+      <img src="static/images/spatial_logo.png" width="80" style="display: block; margin: 0 auto 0.5em;"/>
+      Spatial-X: Zero-Shot Vision-and-Language Navigation with Global Scene Priors
+  </h1>
+  <div class="is-size-5 publication-authors">
+      <span class="author-block"><b style="color:#f67846; font-weight:normal">&#x25B6 </b> Fudan University </b></span>
+      <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> Adelaide University </span>
+      <br>
+      <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b> Shanghai Innovation Institute </span>
+      <span class="author-block"><b style="color:#00f2ee; font-weight:normal">&#x25B6 </b> University of Southern California </span>
+  </div>
+  <br>
+  <a href="https://imnearth.github.io/Spatial-X/" target="_blank">
+      <img src="https://img.shields.io/badge/Project%20Page-SpatialX-6c63ff?style=for-the-badge" alt="project page" />
+  </a>
+  <a href="https://github.com/IMNearth/Spatial-X" target="_blank">
+    <img src="https://img.shields.io/badge/Code-SpatialX-990000?style=for-the-badge" alt="code" />
+  </a>
+  <a href="https://github.com/IMNearth/Spatial-X" target="_blank">
+    <img src="https://img.shields.io/badge/Data-SpatialX-FADA5E?style=for-the-badge" alt="data" />
+  </a>
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank">
+    <img src="https://img.shields.io/badge/License-CC BY NC SA-89CFF0?style=for-the-badge" alt="license" />
+  </a>
+</div>
 
-This repository contains the code and data for our series of work on **zero-shot Vision-and-Language Navigation (VLN)** using **global spatial scene priors**. We are the first to close-loop the pre-exploration to physically grounded 3D scene reconstructions (i.e. point clouds) for VLN agents and investigate how pre-explored 3D scene representations can provide a robust reasoning basis in multiple ways.
+This repository contains the code and data for our **series of work** on **zero-shot Vision-and-Language Navigation (VLN)** using **global spatial scene priors**. We are the first to <span style="color: blue; font-weight: bold;">close-loop the pre-exploration to physically grounded 3D scene reconstructions</span> (i.e. point clouds) for VLN agents and <span style="color: blue; font-weight: bold;">investigate how pre-explored 3D scene priors can provide a robust reasoning basis</span> for MLLM-based agents in multiple ways.
 
-## Our Series of Works
+The overall framework is summarized below:
 
-### SpatialNav: Leveraging Spatial Scene Graphs for Zero-Shot Vision-and-Language Navigation [[arXiv]](https://arxiv.org/abs/2601.06806)
+![](static/images/framework_compressed.png)
 
-> We propose a zero-shot VLN setting that allows agents to pre-explore the environment, and construct the **Spatial Scene Graph (SSG)** to capture global spatial structure and semantics. Based on SSG, **SpatialNav** integrates an agent-centric spatial map, compass-aligned visual representation, and remote object localization for efficient navigation. SpatialNav significantly outperforms existing zero-shot agents and narrows the gap with state-of-the-art learning-based methods.
 
-### SpatialAnt: Autonomous Zero-Shot Robot Navigation via Active Scene Reconstruction and Visual Anticipation [[arXiv]](#)
+
+
+## 🍻 News & TODOs
+- [x] **2026-04-05**: Release the raw code of **SpatialNav** agent. (Dependencies and instructions are comming soon ... )
+- [ ] Release the data of predicted spatial scene graph on perfect human-crafted point clouds.
+- [ ] Release the raw code of environment exploration and scene reconstruction.
+- [ ] Release the data of agent-reconstructed noisy scene point clouds.
+- [ ] Release the raw code of SpatialAnt agent.
+
+
+
+
+## 📚 Our Series of Works
+
+### SpatialNav: Leveraging Spatial Scene Graphs for Zero-Shot Vision-and-Language Navigation [![arXiv](https://img.shields.io/badge/arXiv-Paper-b31b1b?logo=arxiv&style=flat-square)](https://arxiv.org/abs/2601.06806) 
+
+<div>
+    <span class="author-block"><a href="https://imnearth.github.io/">Jiwen Zhang</a>,</span>
+    <span class="author-block"><a href="https://junction4nako.github.io/">Zejun Li</a>,</span>
+    <span class="author-block"><a href="https://siyuanwangw.github.io/">Siyuan Wang</a>,</span>
+    <span class="author-block"><a href="https://scholar.google.com/citations?user=hjp3bMYAAAAJ&hl=en">Xiangyu Shi</a>, </span>
+    <span class="author-block"><a href="http://www.fudan-disc.com/people/zywei">Zhongyu Wei</a><sup>†</sup>,</span>
+    <span class="author-block"> <a href="https://v3alab.github.io/">Qi Wu</a>.</span>
+</div>
+
+> We propose a zero-shot VLN setting that allows agents to pre-explore the environment, and construct the **Spatial Scene Graph (SSG)** to capture global spatial structure and semantics. Based on SSG, **SpatialNav** integrates **an agent-centric spatial map**, compass-aligned visual representation, and remote object localization for efficient navigation. SpatialNav significantly outperforms existing zero-shot agents and narrows the gap with state-of-the-art learning-based methods.
+
+### SpatialAnt: Autonomous Zero-Shot Robot Navigation via Active Scene Reconstruction and Visual Anticipation [![arXiv](https://img.shields.io/badge/arXiv-Paper-b31b1b?logo=arxiv&style=flat-square)](https://arxiv.org/abs/2603.26837)
+
+<div>
+  <span class="author-block"><a href="https://imnearth.github.io/">Jiwen Zhang</a>,</span>
+  <span class="author-block"><a href="https://scholar.google.com/citations?user=hjp3bMYAAAAJ&hl=en">Xiangyu Shi</a>,</span>
+  <span class="author-block"><a href="https://siyuanwangw.github.io/">Siyuan Wang</a>,</span>
+  <span class="author-block"><a href="https://scholar.google.com/citations?user=hr5FDjMAAAAJ&hl=en">Zerui Li</a>,</span>
+  <span class="author-block"><a href="http://www.fudan-disc.com/people/zywei">Zhongyu Wei</a><sup>†</sup>,</span>
+  <span class="author-block"><a href="https://v3alab.github.io/">Qi Wu</a>.</span>
+</div>
 
 > Building on SpatialNav, **SpatialAnt** addresses the reality gap when deploying pre-exploration-based agents on real robots. We introduce a **physical grounding strategy** to recover metric scale from monocular RGB-based reconstructed scene point clouds. We further design a **visual anticipation mechanism** that renders future observations from noisy point clouds for counterfactual reasoning. SpatialAnt achieves state-of-the-art zero-shot performance in both simulation and real-world deployment on the Hello Robot.
+
+
+
+## Installation
+
+(Coming soon ...)
+
+
+
 
 ## Performance
 
 ### Results in Discrete Environments
 
-* The <b>best</b> and the <u>second best</u> results **within each group** are denoted by <b>bold</b> and <u>underline</u>.
+* The <b>best</b> and the <ins>second best</ins> results **within each group** are denoted by <b>bold</b> and <ins>underline</ins>.
 
 <div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
   <table style="width: 100%; max-width: 1000px; border-collapse: collapse; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
@@ -82,10 +151,10 @@ This repository contains the code and data for our series of work on **zero-shot
         <td style="padding: 8px; text-align: left;">HAMT</td>
         <td style="padding: 8px;">--</td>
         <td style="padding: 8px;">11.46</td>
-        <td style="padding: 8px;"><u>2.29</u></td>
+        <td style="padding: 8px;"><ins>2.29</ins></td>
         <td style="padding: 8px;">73</td>
         <td style="padding: 8px;">66</td>
-        <td style="padding: 8px;"><u>61</u></td>
+        <td style="padding: 8px;"><ins>61</ins></td>
         <td style="padding: 8px;">36.8</td>
         <td style="padding: 8px;">33.0</td>
         <td style="padding: 8px;">30.2</td>
@@ -95,12 +164,12 @@ This repository contains the code and data for our series of work on **zero-shot
         <td style="padding: 8px;">--</td>
         <td style="padding: 8px;">13.94</td>
         <td style="padding: 8px;">3.31</td>
-        <td style="padding: 8px;"><u>81</u></td>
-        <td style="padding: 8px;"><u>72</u></td>
+        <td style="padding: 8px;"><ins>81</ins></td>
+        <td style="padding: 8px;"><ins>72</ins></td>
         <td style="padding: 8px;">60</td>
-        <td style="padding: 8px;"><u>51.1</u></td>
-        <td style="padding: 8px;"><u>47.0</u></td>
-        <td style="padding: 8px;"><u>33.7</u></td>
+        <td style="padding: 8px;"><ins>51.1</ins></td>
+        <td style="padding: 8px;"><ins>47.0</ins></td>
+        <td style="padding: 8px;"><ins>33.7</ins></td>
       </tr>
       <tr>
         <td style="padding: 8px; text-align: left;">DUET+ScaleVLN</td>
@@ -169,13 +238,13 @@ This repository contains the code and data for our series of work on **zero-shot
         <td style="padding: 8px; text-align: left;"><b>SpatialNav (Ours)</b></td>
         <td style="padding: 8px;">&#10003;</td>
         <td style="padding: 8px;">13.8</td>
-        <td style="padding: 8px;"><u>4.54</u></td>
-        <td style="padding: 8px;"><u>68.2</u></td>
-        <td style="padding: 8px;"><u>57.7</u></td>
-        <td style="padding: 8px;"><u>47.8</u></td>
+        <td style="padding: 8px;"><ins>4.54</ins></td>
+        <td style="padding: 8px;"><ins>68.2</ins></td>
+        <td style="padding: 8px;"><ins>57.7</ins></td>
+        <td style="padding: 8px;"><ins>47.8</ins></td>
         <td style="padding: 8px;"><b>58.1</b></td>
-        <td style="padding: 8px;"><u>49.6</u></td>
-        <td style="padding: 8px;"><u>34.6</u></td>
+        <td style="padding: 8px;"><ins>49.6</ins></td>
+        <td style="padding: 8px;"><ins>34.6</ins></td>
       </tr>
     </tbody>
   </table>
@@ -183,7 +252,7 @@ This repository contains the code and data for our series of work on **zero-shot
 
 ### Results in Continuous Environments
 
-* The <b>best supervised</b> results are highlighted in <b>bold</b>, while the <u>best zero-shot</u> results are <u>underlined</u>.  
+* The <b>best supervised</b> results are highlighted in <b>bold</b>, while the <ins>best zero-shot</ins> results are <ins>underlined</ins>.  
 * "Pre-Exp" denotes whether the zero-shot agent adopts the pre-exploration based navigation settings.
 
 <div style="overflow-x: auto; font-family: sans-serif; font-size: 0.85em; display: flex; flex-direction: column; align-items: center;">
@@ -317,19 +386,20 @@ This repository contains the code and data for our series of work on **zero-shot
         <td style="padding: 8px;">8</td>
         <td style="padding: 8px; text-align: left;"><b>SpatialAnt (Ours)</b></td>
         <td style="padding: 8px;">&#10003;</td>
-        <td style="padding: 8px;"><u>4.42</u></td>
-        <td style="padding: 8px;"><u>76.0</u></td>
-        <td style="padding: 8px;"><u>66.0</u></td>
-        <td style="padding: 8px;"><u>54.4</u></td>
-        <td style="padding: 8px;"><u>69.5</u></td>
-        <td style="padding: 8px;"><u>5.28</u></td>
-        <td style="padding: 8px;"><u>50.8</u></td>
-        <td style="padding: 8px;"><u>35.6</u></td>
-        <td style="padding: 8px;"><u>65.4</u></td>
+        <td style="padding: 8px;"><ins>4.42</ins></td>
+        <td style="padding: 8px;"><ins>76.0</ins></td>
+        <td style="padding: 8px;"><ins>66.0</ins></td>
+        <td style="padding: 8px;"><ins>54.4</ins></td>
+        <td style="padding: 8px;"><ins>69.5</ins></td>
+        <td style="padding: 8px;"><ins>5.28</ins></td>
+        <td style="padding: 8px;"><ins>50.8</ins></td>
+        <td style="padding: 8px;"><ins>35.6</ins></td>
+        <td style="padding: 8px;"><ins>65.4</ins></td>
       </tr>
     </tbody>
   </table>
 </div>
+
 
 
 ## Citation
@@ -347,11 +417,11 @@ If you find our work useful, please consider citing:
 @article{zhang2026spatialant,
   title={SpatialAnt: Autonomous Zero-Shot Robot Navigation via Active Scene Reconstruction and Visual Anticipation},
   author={Zhang, Jiwen and Shi, Xiangyu and Wang, Siyuan and Li, Zerui and Wei, Zhongyu and Wu, Qi},
+  journal={arXiv preprint arXiv:2603.26837},
   year={2026}
 }
-
-
 ```
+
 
 
 

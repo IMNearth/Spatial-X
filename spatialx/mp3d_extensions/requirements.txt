@@ -1,0 +1,11 @@
+py360convert
+matplotlib
+networkx
+pyntcloud
+dataclasses
+tqdm
+langchain==0.0.246
+openai==0.28.1
+numpy==1.26.4
+aiohttp<3.9
+
